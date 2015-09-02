@@ -5,7 +5,7 @@ Cryptography: Theory and practice, 3rd edition.
 
 Algoritmos a implementar:
 
-- Algoritmo de césar - Tato
+- Algoritmo de sustitución - Tato, listo, sugerencia: actualizar para que soporte cadenas de texto de más de 100 caracteres.
 - Criptosistema por sustitución - Miguel
 - Criptosistema Afín - Miguel
 - RSA (usa power mod) - Omar
