@@ -8,7 +8,7 @@ Algoritmos a implementar:
 - Algoritmo de sustitución - Tato, listo, sugerencia: actualizar para que soporte cadenas de texto de más de 100 caracteres.
 - Criptosistema por sustitución - Miguel
 - Criptosistema Afín - Miguel
-- RSA (usa power mod) - Omar
+- RSA (usa power mod) - Omar, listo.
 - Criptosistema Vigenere - Tato
 - Criptosistema Hill - Omar
 - Sistema de permutación (Caso especial de Hill) - Eduar
