@@ -73,10 +73,52 @@ public class Util {
         }
     }
     
+    // Finds the greatest common divisor for a and b
     public static long gcd(long a, long b) {
         if (b==0)
             return a;
         return gcd(b,a%b);
+    }
+    
+    // Finds a the shortest positive value b such (a*b)%mod is 1
+    // Using brute force right now, should use the Extended Euclidean Algorithm.
+    public static long multiplicativeInverse(long a, long mod){
+        a %= mod;
+        long b = 1;
+        while(b<mod && (a*b)%mod!=1)
+            b++;
+        if(b==mod)
+            return -1;
+        return b;
+    }
+    
+    // Parses a char and turns the value into a number between 0 and 25, inclusive.
+    public static int charToNumber(char c){
+        int d = c-'a';
+        if(d>=0 && d<=25)
+            return d;
+        d = c-'A';
+        if(d>=0 && d<=25)
+            return d;
+        if(c=='á' || c=='Á')
+            return 'a'-'a';
+        if(c=='é' || c=='É')
+            return 'a'-'e';
+        if(c=='í' || c=='Í')
+            return 'a'-'i';
+        if(c=='ó' || c=='Ó')
+            return 'a'-'o';
+        if(c=='ú' || c=='Ú')
+            return 'a'-'u';
+        System.err.println("Warning: Trying to parse an unkown character");
+        return 0;
+    }
+    
+    // parses a number between 0 and 25, inclusive into a non capital character.
+    public static char numberToChar(int number){
+        if(number<0 || number>25)
+            System.err.println("Trying to parse an out of bounds number into a character");
+        return (char) ('a'+number);
     }
     
     //For testing
@@ -99,5 +141,10 @@ public class Util {
         
         //gcd
         System.out.println(gcd(23, 43));
+        
+        // multiplicative inverse
+        System.out.println(multiplicativeInverse(8+23*5, 23)); //3
+        System.out.println(multiplicativeInverse(1892, 23187));
+        System.out.println(multiplicativeInverse(11, 6*4)); 
     }
 }
