@@ -8,6 +8,8 @@ package cryptography;
 /*
   The keys are given in a Long array with the following order
   [p, q, e]
+  You should have in mind that the keys used should large enough so the module n
+  can hold all the values that you want to parse. In this case we parse 
 */
 public class RSA implements Algorithm{
 
