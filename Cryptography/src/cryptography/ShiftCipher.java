@@ -5,10 +5,8 @@
  */
 package cryptography;
 
-/**
- *
- * @author Tato
- */
+// For this you should send the String representation of integer number
+// that you want to use as a key.
 public class ShiftCipher implements Algorithm {
     
     private String plainText;
