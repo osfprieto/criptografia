@@ -71,7 +71,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="spinnerKey" max="32767" attributes="0"/>
+                                  <Component id="spinnerKeyShift" max="32767" attributes="0"/>
                                   <Component id="jLabel1" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -87,8 +87,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="buttonDecipher" max="32767" attributes="0"/>
-                          <Component id="buttonCipher" max="32767" attributes="0"/>
+                          <Component id="buttonDecipherShift" max="32767" attributes="0"/>
+                          <Component id="buttonCipherShift" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="399" max="-2" attributes="0"/>
                   </Group>
@@ -105,12 +105,12 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonCipher" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonCipherShift" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="spinnerKey" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonDecipher" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spinnerKeyShift" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonDecipherShift" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
@@ -118,27 +118,27 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="buttonDecipher">
+            <Component class="javax.swing.JButton" name="buttonDecipherShift">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;-- Descifrar --"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDecipherActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDecipherShiftActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JSpinner" name="spinnerKey">
+            <Component class="javax.swing.JSpinner" name="spinnerKeyShift">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Traslaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Translaci&#xf3;n - Llave"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="buttonCipher">
+            <Component class="javax.swing.JButton" name="buttonCipherShift">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-- Cifrar --&gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCipherActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCipherShiftActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -148,7 +148,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="clearTextArea">
+                <Component class="javax.swing.JTextArea" name="clearTextAreaShift">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -163,7 +163,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="cipherTextArea">
+                <Component class="javax.swing.JTextArea" name="cipherTextAreaShift">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -317,15 +317,220 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="896" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="447" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" pref="423" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="textFieldRSAQ" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="textFieldRSAE" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="textFieldRSAP" min="-2" pref="87" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="buttonDecipherRSA" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonCipherRSA" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelRSAN" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelRSAFiN" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelRSAD" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="567" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" pref="343" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="buttonCipherRSA" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="buttonDecipherRSA" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textFieldRSAP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textFieldRSAQ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="textFieldRSAE" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabelRSAN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabelRSAFiN" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                      <Component id="jLabelRSAD" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="buttonDecipherRSA">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;-- Descifrar --"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDecipherRSAActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonCipherRSA">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="-- Cifrar --&gt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCipherRSAActionPerformed"/>
+              </Events>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="clearTextAreaRSA">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="cipherTextAreaRSA">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="P"/>
+                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero primo para generaci&#xf3;n del m&#xf3;dulo a utilizar junto con Q"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Q"/>
+                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero primo para generaci&#xf3;n del m&#xf3;dulo a utilizar junto con P"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="E (p&#xfa;blica)"/>
+                <Property name="toolTipText" type="java.lang.String" value="Llave p&#xfa;blica de cifrado"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="N (p&#xfa;blica)"/>
+                <Property name="toolTipText" type="java.lang.String" value="P*Q"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="D"/>
+                <Property name="toolTipText" type="java.lang.String" value="Llave privada para descifrado."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Euler(N)"/>
+                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero primo para generaci&#xf3;n del m&#xf3;dulo a utilizar junto con P"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelRSAD">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="D"/>
+                <Property name="toolTipText" type="java.lang.String" value="Llave privada para descifrado."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelRSAFiN">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Euler(N)"/>
+                <Property name="toolTipText" type="java.lang.String" value="N&#xfa;mero primo para generaci&#xf3;n del m&#xf3;dulo a utilizar junto con P"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelRSAN">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="N"/>
+                <Property name="toolTipText" type="java.lang.String" value="P*Q"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="textFieldRSAP">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Prime number"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="textFieldRSAQ">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Prime number"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="textFieldRSAE">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Prime number"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Constraints>

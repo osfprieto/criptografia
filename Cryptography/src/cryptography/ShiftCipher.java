@@ -5,8 +5,12 @@
  */
 package cryptography;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 // For this you should send the String representation of integer number
-// that you want to use as a key.
+// that you want to use as a key. 
 public class ShiftCipher implements Algorithm {
     
     private String plainText;
@@ -59,68 +63,9 @@ public class ShiftCipher implements Algorithm {
         this.cipherText = cipherText;
     }
            
-    public String shiftEncryptor()
-    {
-        int[] resultInt = new int[100];
-        String result = "";
-        String aux = "";
-      for(int i = 0; i < getPlainText().length(); i++)
-      {
-          if(getPlainText().charAt(i) != ' '){
-            //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
-              resultInt[i] = (letterToInt( getPlainText().charAt(i)) + Integer.parseInt(key)) % 26;
-             // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
-              aux = String.valueOf((char)(resultInt[i] + 97));
-              result = result + aux; 
-          }
-          else
-          {
-              result += " ";
-          } 
-      }
-      
-      return result;
-    }
-    
-    public String shiftDecryptor()
-    {
-        int[] resultInt = new int[100];
-        String result = "";
-        String aux = "";
-        
-        for(int j = 0; j<26; j++ ){
-            result += (j+1) + ". ";
-            for(int i = 0; i < getCipherText().length(); i++)
-                {
-                 //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
-                   if(getCipherText().charAt(i) != ' '){
-                        resultInt[i] = (letterToInt( getCipherText().charAt(i)) + j) % 26;
-                       // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
-                         aux = String.valueOf((char)(resultInt[i] + 97));
-                         result = result + aux; 
-                   }
-                   else
-                   {
-                       result = result + " ";
-                   }
-                }
-            
-            result =  result + "\n";     
-        }
-      return result;
-    }
-    
-    public int letterToInt(char letter)
-    {
-        
-        String aux = String.valueOf((int)letter);
-        return Integer.parseInt(aux) - 97;
-    }
-    
-
     @Override
     public String getName() {
-        return "Criptosistema de Sustitución";
+        return "Criptosistema de Desplazamiento";
     }
 
    
@@ -157,21 +102,22 @@ public class ShiftCipher implements Algorithm {
 
     @Override
     public void cipher() {
-        int[] resultInt = new int[100];
+        List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
       for(int i = 0; i < getPlainText().length(); i++)
       {
           if(getPlainText().charAt(i) != ' '){
             //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
-              resultInt[i] = (letterToInt( getPlainText().charAt(i)) + Integer.parseInt(key)) % 26;
+              resultInt.add((Util.charToNumber( getPlainText().charAt(i)) + Integer.parseInt(key)) % 26);
              // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
-              aux = String.valueOf((char)(resultInt[i] + 97));
+               aux = String.valueOf((char)(resultInt.get(i) + 97));
               result = result + aux; 
           }
           else
           {
-              result += " ";
+              resultInt.add(255);
+             
           } 
       }
         setCipherData(result);
@@ -179,7 +125,7 @@ public class ShiftCipher implements Algorithm {
 
     @Override
     public void decipher() {
-         int[] resultInt = new int[100];
+         List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
         
@@ -189,18 +135,20 @@ public class ShiftCipher implements Algorithm {
                 {
                  //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
                    if(getCipherText().charAt(i) != ' '){
-                        resultInt[i] = (letterToInt( getCipherText().charAt(i)) + j) % 26;
+                        resultInt.add((Util.charToNumber( getCipherText().charAt(i)) + j) % 26);
                        // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
-                         aux = String.valueOf((char)(resultInt[i] + 97));
+                         aux = String.valueOf((char)(resultInt.get(i) + 97));
                          result = result + aux; 
                    }
                    else
                    {
-                       result = result + " ";
+                       resultInt.add(255);
+                       
                    }
                 }
             
-            result =  result + "\n";     
+            result =  result + "\n"; 
+            resultInt.clear();
         }
         setClearData(result);
     }

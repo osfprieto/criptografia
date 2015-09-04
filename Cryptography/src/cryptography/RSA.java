@@ -101,17 +101,24 @@ public class RSA implements Algorithm{
         return n;
     }
     
+    public long getD(){
+        return d;
+    }
+    
     public long getE(){
         return e;
     }
     
+    public long getFiN(){
+        return fi_n;
+    }
     // Test.
     public static void main(String[] args){
         RSA rsa = new RSA();
         Long[] keys = new Long[3];
         keys[0] = new Long(97); //p
         keys[1] = new Long(89); // q
-        keys[2] = new Long(13); // e, 11 porque es coprimo a fi_n (porque 11 es primo)
+        keys[2] = new Long(13); // e, 13 porque es coprimo a fi_n (porque 13 es primo)
         
         rsa.setKeys(keys);
         rsa.setClearData("This is my test");
@@ -119,5 +126,8 @@ public class RSA implements Algorithm{
         System.out.println("Ciphered: "+rsa.getCipherData());
         rsa.decipher();
         System.out.println("Deciphered: "+rsa.getClearData());
+        System.out.println("D: "+rsa.getD());
+        System.out.println("Fi_n: "+rsa.getFiN());
+        System.out.println("N: "+rsa.getN());
     }
 }
