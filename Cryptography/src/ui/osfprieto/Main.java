@@ -5,7 +5,6 @@
  */
 package ui.osfprieto;
 
-import cryptography.Algorithm;
 import cryptography.RSA;
 import cryptography.ShiftCipher;
 
@@ -435,9 +434,7 @@ public class Main extends javax.swing.JFrame {
             jLabelRSAD.setText(rsa.getD()+"");
 
             rsa.setClearData(clearTextAreaRSA.getText());
-            System.out.println("cipher");
             rsa.cipher();
-            System.out.println("done");
             cipherTextAreaRSA.setText((String) rsa.getCipherData());
         }
     }//GEN-LAST:event_buttonCipherRSAActionPerformed
