@@ -1,17 +1,13 @@
 package ui.oeaceoa;
 
-
 import java.awt.Color;
 import cryptography.*;
-
-
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Tato
@@ -20,10 +16,17 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
+     *
      */
+  //  private ShiftCipherPanel pnlShiftChiper = new ShiftCipherPanel();
+    public String cipherTxt;
+    public String plainText;
+    
     public Principal() {
         initComponents();
         inicioDefault();
+        this.setTitle("Cifrado y Descrifrado 2015");
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
 
@@ -45,12 +48,8 @@ public class Principal extends javax.swing.JFrame {
         lblCipherText = new javax.swing.JLabel();
         cbCifrar = new javax.swing.JCheckBox();
         cbDescifrar = new javax.swing.JCheckBox();
-        jpShift = new javax.swing.JPanel();
-        lblKey = new javax.swing.JLabel();
-        tfKey = new javax.swing.JTextField();
         jpOptions = new javax.swing.JPanel();
         cboxOptions = new javax.swing.JComboBox();
-        btnRun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,10 +61,13 @@ public class Principal extends javax.swing.JFrame {
         taCipherText.setRows(5);
         jScrollPane2.setViewportView(taCipherText);
 
+        lblPlainText.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         lblPlainText.setText("Texto Plano");
 
+        lblCipherText.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         lblCipherText.setText("Texto Cifrado");
 
+        cbCifrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cbCifrar.setText("Cifrar");
         cbCifrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +75,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        cbDescifrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         cbDescifrar.setText("Descifrar");
         cbDescifrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,21 +88,23 @@ public class Principal extends javax.swing.JFrame {
         jpPrincipalLayout.setHorizontalGroup(
             jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPrincipalLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(lblPlainText, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCipherText, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
-            .addGroup(jpPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCifrar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                    .addGroup(jpPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cbCifrar)))
+                .addGap(18, 18, 18)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbDescifrar)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbDescifrar))
+                .addContainerGap())
+            .addGroup(jpPrincipalLayout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(lblPlainText, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCipherText, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(188, 188, 188))
         );
         jpPrincipalLayout.setVerticalGroup(
             jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,41 +113,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbCifrar)
                     .addComponent(cbDescifrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlainText)
                     .addComponent(lblCipherText))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)))
         );
 
-        lblKey.setText("Key = ");
-
-        javax.swing.GroupLayout jpShiftLayout = new javax.swing.GroupLayout(jpShift);
-        jpShift.setLayout(jpShiftLayout);
-        jpShiftLayout.setHorizontalGroup(
-            jpShiftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpShiftLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(lblKey)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfKey, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpShiftLayout.setVerticalGroup(
-            jpShiftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpShiftLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpShiftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblKey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfKey))
-                .addContainerGap())
-        );
-
-        jpOptions.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+        jpOptions.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptosistema", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
         jpOptions.setName("Opciones"); // NOI18N
 
         cboxOptions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Desplazamiento", "Vigenere" }));
@@ -157,23 +138,16 @@ public class Principal extends javax.swing.JFrame {
         jpOptionsLayout.setHorizontalGroup(
             jpOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpOptionsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(cboxOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 432, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jpOptionsLayout.setVerticalGroup(
             jpOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpOptionsLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(cboxOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
-
-        btnRun.setText("Run");
-        btnRun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRunActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,28 +155,17 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpShift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRun))
-                    .addComponent(jpOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(444, 444, 444)
+                .addComponent(jpOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jpOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpShift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRun)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -214,7 +177,6 @@ public class Principal extends javax.swing.JFrame {
         taCipherText.setEnabled(false);
         taCipherText.setText("");
         taPlainText.setEnabled(true);
-        jpOptions.setVisible(true);
         cboxOptions.setSelectedIndex(0);
         
     }//GEN-LAST:event_cbCifrarActionPerformed
@@ -225,70 +187,55 @@ public class Principal extends javax.swing.JFrame {
         taCipherText.setEnabled(true);
         taPlainText.setEnabled(false);
         taPlainText.setText("");
-        jpOptions.setVisible(true);
         cboxOptions.setSelectedIndex(0);
-        jpShift.setVisible(false);
-        taPlainText.setText(""); 
-       
-    }//GEN-LAST:event_cbDescifrarActionPerformed
-
-    private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        // TODO add your handling code here:
-        ShiftCipher encryptor = new ShiftCipher();
+        taPlainText.setText("");        
         
-        if(cboxOptions.getSelectedItem() == "Desplazamiento")
-        {            
-            if(cbCifrar.isSelected() == true)
-            {
-                encryptor.setClearData(taPlainText.getText());
-                encryptor.setKeys(tfKey.getText());
-                
-                //taCipherText.setText(encryptor.shiftEncryptor());
-                encryptor.cipher();
-                taCipherText.setText((String)encryptor.getCipherData());  
-            }
-            else if(cbDescifrar.isSelected() == true)
-            {
-                encryptor.setCipherData(taCipherText.getText());
-                encryptor.decipher();
-                taPlainText.setText((String) encryptor.getClearData());
-            }
-        }
-    }//GEN-LAST:event_btnRunActionPerformed
-
+    }//GEN-LAST:event_cbDescifrarActionPerformed
+    
     private void cboxOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxOptionsActionPerformed
         // TODO add your handling code here:
-        if(cboxOptions.getSelectedItem() == "Desplazamiento")
-        {  
-           if(cbCifrar.isSelected() == true)
-           {
-               jpShift.setVisible(true);
-           }
-           else if(cbDescifrar.isSelected() == true)
-           {
-               jpShift.setVisible(false);
-           }
-        }
-        else if(cboxOptions.getSelectedItem() == "Vigenere")
-        {
-           if(cbCifrar.isSelected() == true)
-           {
-           
-           }
-           else if(cbDescifrar.isSelected() == true)
-           {
-           
-           }
+        if (cboxOptions.getSelectedItem() == "Desplazamiento") {            
+            if (cbCifrar.isSelected() == true) {
+                ShiftCipherDialog dialog = new ShiftCipherDialog(this, true);
+                dialog.setPlainText(this.taPlainText.getText());
+                dialog.setVisible(true);
+                
+                this.taCipherText.setText(dialog.getCipherText());                
+            } else if (cbDescifrar.isSelected() == true) {
+                ShiftDecipherDialog dialog = new ShiftDecipherDialog(this, true);
+                dialog.setCipherText(this.taCipherText.getText());
+                dialog.setVisible(true);
+                
+                this.taPlainText.setText(dialog.getPlainText());
+            }
+        } else if (cboxOptions.getSelectedItem() == "Vigenere") {
+            if (cbCifrar.isSelected() == true) {
+                VigenereCipherDialog dialog = new VigenereCipherDialog(this, true);
+                dialog.setPlainText(this.taPlainText.getText());
+                dialog.setVisible(true);
+                
+                this.taCipherText.setText(dialog.getCipherText());
+            } else if (cbDescifrar.isSelected() == true) {
+                
+                VigenereDecipherDialog dialog = new VigenereDecipherDialog(this, true);
+                dialog.setCipherText(this.taCipherText.getText());
+                dialog.setVisible(true);
+                
+                this.taPlainText.setText(dialog.getPlainText());
+            }
         }
     }//GEN-LAST:event_cboxOptionsActionPerformed
-
-    private void inicioDefault()
-    {
-      taCipherText.setEnabled(false);
-      taPlainText.setEnabled(false);
-      jpOptions.setVisible(false);
-      jpShift.setVisible(false);     
+    
+    private void inicioDefault() {
+        taCipherText.setEnabled(false);
+        taPlainText.setEnabled(false);
+        //jpOptions.setVisible(false);
     }
+    
+    public String getCipherText() {
+        return this.taCipherText.getText();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -327,7 +274,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRun;
     private javax.swing.JCheckBox cbCifrar;
     private javax.swing.JCheckBox cbDescifrar;
     private javax.swing.JComboBox cboxOptions;
@@ -335,12 +281,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpOptions;
     private javax.swing.JPanel jpPrincipal;
-    private javax.swing.JPanel jpShift;
     private javax.swing.JLabel lblCipherText;
-    private javax.swing.JLabel lblKey;
     private javax.swing.JLabel lblPlainText;
     private javax.swing.JTextArea taCipherText;
     private javax.swing.JTextArea taPlainText;
-    private javax.swing.JTextField tfKey;
     // End of variables declaration//GEN-END:variables
+
 }
