@@ -10,7 +10,6 @@ Algoritmos a implementar:
 - Criptosistema Afín - Miguel
 - RSA (usa power mod) - Omar, listo.
 - Criptosistema Vigenere - Tato
-- Criptosistema Hill - Omar
 - Sistema de permutación (Caso especial de Hill) - Eduar
 - Criptosistema Hill mejorado - Eduar
-- Cifrado de Hill mejorado para imágenes. - Omar (Quizás necesite ayuda)
+- Cifrado de Hill mejorado para imágenes. - Eduar lo hizo?
