@@ -5,8 +5,6 @@
  */
 package cryptography;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Miguel

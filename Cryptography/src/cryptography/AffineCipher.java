@@ -5,59 +5,85 @@
  */
 package cryptography;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Miguel
  */
 public class AffineCipher {
     
-    public static String encryptionMessage(String Msg)
-    {
+    private String plainText;
+    private String cipherText;
+    private int a;
+    private int b;
+    
+    public AffineCipher(){}
+    
+    public String encryptionMessage(String Msg){
         String CTxt = "";
-        int a = 3;
-        int b = 6;
-        for (int i = 0; i < Msg.length(); i++)
-        {
+        setA(3);
+        setB(6);
+        for (int i = 0; i < Msg.length(); i++){
             CTxt = CTxt + (char) ((((a * Msg.charAt(i)) + b) % 26) + 65);
         }
         return CTxt;
     }
  
-    public static String decryptionMessage(String CTxt)
-    {
+    public String decryptionMessage(String CTxt){
         String Msg = "";
-        int a = 3;
-        int b = 6;
+        setA(3);
+        setB(6);
         int a_inv = 0;
         int flag;
-        for (int i = 0; i < 26; i++)
-        {
+        for (int i = 0; i < 26; i++){
             flag = (a * i) % 26;
-            if (flag == 1)
-            {
+            if (flag == 1){
                 a_inv = i;
                 System.out.println(i);
             }
         }
-        for (int i = 0; i < CTxt.length(); i++)
-        {
+        for (int i = 0; i < CTxt.length(); i++){
             Msg = Msg + (char) (((a_inv * ((CTxt.charAt(i) - b)) % 26)) + 65);
         }
         return Msg;
     }
- 
-    public static void main(String[] args)
-    {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the message: ");
-        String message = sc.next();
-        System.out.println("Message is :" + message);
-        System.out.println("Encrypted Message is : "
-                + encryptionMessage(message));
-        System.out.println("Decrypted Message is: "
-                + decryptionMessage(encryptionMessage(message)));
-        sc.close();
+    
+    public void encryp(){
+        setCipherText(encryptionMessage(getPlainText()));
     }
+    
+    public void decryp(){
+        setPlainText(decryptionMessage(getCipherText()));
+    }
+
+    public String getPlainText() {
+        return plainText;
+    }
+
+    public void setPlainText(String plainText) {
+        this.plainText = plainText;
+    }
+
+    public String getCipherText() {
+        return cipherText;
+    }
+
+    public void setCipherText(String cipherText) {
+        this.cipherText = cipherText;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public void setA(int a) {
+        this.a = a;
+    }
+
+    public int getB() {
+        return b;
+    }
+
+    public void setB(int b) {
+        this.b = b;
+    } 
 }

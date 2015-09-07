@@ -6,24 +6,21 @@
 package ui.mmsierrac;
 
 import cryptography.MonoalphabeticCipher;
-import static cryptography.MonoalphabeticCipher.doDecryption;
-import static cryptography.MonoalphabeticCipher.doEncryption;
+import cryptography.AffineCipher;
+import static java.sql.DriverManager.println;
 
 /**
  *
  * @author Miguel
  */
 public class Main extends javax.swing.JFrame {
-    
-    public String cipherTxt;
-    public String plainText;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        this.setTitle("Cifrado y Descrifrado 2015");
+        this.setTitle("Introducción a la Criptografía");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -201,7 +198,12 @@ public class Main extends javax.swing.JFrame {
             dialog.setVisible(true);
             this.jTextArea2.setText(dialog.getCipherText());                
             }
-        if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){}
+        else if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
+            AffineCipher affineCipher = new AffineCipher();
+            affineCipher.setPlainText(this.jTextArea1.getText());
+            affineCipher.encryp();
+            this.jTextArea2.setText(affineCipher.getCipherText());
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
             MonoalphabeticCipher dialog = new MonoalphabeticCipher();
             dialog.setPlainText(this.jTextArea1.getText());
@@ -233,7 +235,12 @@ public class Main extends javax.swing.JFrame {
             dialog.setVisible(true);
             this.jTextArea1.setText(dialog.getPlainText());
         }
-        if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){}
+        if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
+            AffineCipher affineCipher = new AffineCipher();
+            affineCipher.setCipherText(this.jTextArea2.getText());
+            affineCipher.decryp();
+            this.jTextArea1.setText(affineCipher.getPlainText());
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
             MonoalphabeticCipher dialog = new MonoalphabeticCipher();
             dialog.setCipherText(this.jTextArea2.getText());
