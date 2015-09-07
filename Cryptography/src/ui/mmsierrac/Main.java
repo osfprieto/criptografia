@@ -7,7 +7,6 @@ package ui.mmsierrac;
 
 import cryptography.MonoalphabeticCipher;
 import cryptography.AffineCipher;
-import static java.sql.DriverManager.println;
 
 /**
  *

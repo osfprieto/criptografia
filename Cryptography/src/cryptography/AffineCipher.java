@@ -5,6 +5,8 @@
  */
 package cryptography;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Miguel
@@ -13,39 +15,39 @@ public class AffineCipher {
     
     private String plainText;
     private String cipherText;
-    private int a;
-    private int b;
+    private int firstKey = 5;
+    private int secondKey = 19;
+    private int module = 26;
     
     public AffineCipher(){}
     
-    public String encryptionMessage(String Msg){
-        String CTxt = "";
-        setA(3);
-        setB(6);
-        for (int i = 0; i < Msg.length(); i++){
-            CTxt = CTxt + (char) ((((a * Msg.charAt(i)) + b) % 26) + 65);
+    public String encryptionMessage(String input) {
+    StringBuilder builder = new StringBuilder();
+    for (int in = 0; in < input.length(); in++) {
+        char character = input.charAt(in);
+        if (Character.isLetter(character)) {
+            character = (char) ((firstKey * (character - 'a') + secondKey) % module + 'a');
         }
-        return CTxt;
+        builder.append(character);
     }
- 
-    public String decryptionMessage(String CTxt){
-        String Msg = "";
-        setA(3);
-        setB(6);
-        int a_inv = 0;
-        int flag;
-        for (int i = 0; i < 26; i++){
-            flag = (a * i) % 26;
-            if (flag == 1){
-                a_inv = i;
-                System.out.println(i);
-            }
+    return builder.toString();
+}
+
+    public String decryptionMessage(String input) {
+    StringBuilder builder = new StringBuilder();
+    // compute firstKey^-1 aka "modular inverse"
+    BigInteger inverse = BigInteger.valueOf(firstKey).modInverse(BigInteger.valueOf(module));
+    // perform actual decryption
+    for (int in = 0; in < input.length(); in++) {
+        char character = input.charAt(in);
+        if (Character.isLetter(character)) {
+            int decoded = inverse.intValue() * (character - 'a' - secondKey + module);
+            character = (char) (decoded % module + 'a');
         }
-        for (int i = 0; i < CTxt.length(); i++){
-            Msg = Msg + (char) (((a_inv * ((CTxt.charAt(i) - b)) % 26)) + 65);
-        }
-        return Msg;
+        builder.append(character);
     }
+    return builder.toString();
+}
     
     public void encryp(){
         setCipherText(encryptionMessage(getPlainText()));
@@ -71,19 +73,19 @@ public class AffineCipher {
         this.cipherText = cipherText;
     }
 
-    public int getA() {
-        return a;
+    public int getFirstKey() {
+        return firstKey;
     }
 
-    public void setA(int a) {
-        this.a = a;
+    public void setFirstKey(int firstKey) {
+        this.firstKey = firstKey;
     }
 
-    public int getB() {
-        return b;
+    public int getSecondKey() {
+        return secondKey;
     }
 
-    public void setB(int b) {
-        this.b = b;
+    public void setSecondKey(int secondKey) {
+        this.secondKey = secondKey;
     } 
 }
