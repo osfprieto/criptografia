@@ -3,18 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 import java.util.Hashtable;
 import java.util.Vector;
+
+/**
+ *
+ * @author Miguel
+ */
+
 /**
  *
  * La clave ccorresponde a una cadena perteneciente al alfabeto inglés
  */
-public class VigenereCipher implements Algorithm{
+public class VigenereCipherAlgorithm implements ControlInterface{
     
      private String plainText;
     private String key;
@@ -22,7 +27,7 @@ public class VigenereCipher implements Algorithm{
     private String infoM;
     private String infoKey;
     
-    public VigenereCipher()
+    public VigenereCipherAlgorithm()
     {
     }
 
@@ -74,7 +79,7 @@ public class VigenereCipher implements Algorithm{
     }
 
     @Override
-    public void cipher() {
+    public void encrypt() {
          List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
@@ -86,7 +91,7 @@ public class VigenereCipher implements Algorithm{
       {
           if(getPlainText().charAt(i) != ' '){
 
-            resultInt.add((Util.charToNumber( getPlainText().charAt(i)) + keyIntegers[indexKey]) % 26);
+            resultInt.add((ToolsAlgorithms.charToNumber( getPlainText().charAt(i)) + keyIntegers[indexKey]) % 26);
             aux = String.valueOf((char)(resultInt.get(i) + 97));
             result = result + aux; 
             indexKey = (indexKey + 1) % m ;
@@ -100,7 +105,7 @@ public class VigenereCipher implements Algorithm{
     }
 
     @Override
-    public void decipher() {
+    public void decrypt() {
          List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
@@ -112,7 +117,7 @@ public class VigenereCipher implements Algorithm{
       {
           if(getCipherText().charAt(i) != ' '){
 
-            resultInt.add(( Util.charToNumber( getCipherText().charAt(i)) - keyIntegers[indexKey]) % 26);
+            resultInt.add(( ToolsAlgorithms.charToNumber( getCipherText().charAt(i)) - keyIntegers[indexKey]) % 26);
             if( 97 + resultInt.get(i) < 97)
             {
                aux = String.valueOf( (char)(123 + resultInt.get(i))); 
@@ -323,7 +328,7 @@ public class VigenereCipher implements Algorithm{
         
         for(int i = 0; i < keyIntegers.length; i++)
         {
-            keyIntegers[i] = Util.charToNumber(key.charAt(i));
+            keyIntegers[i] = ToolsAlgorithms.charToNumber(key.charAt(i));
         }
         return keyIntegers;
     }

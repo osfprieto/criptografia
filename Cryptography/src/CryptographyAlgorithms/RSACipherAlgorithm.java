@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
+
+/**
+ *
+ * @author Miguel
+ */
 
 /*
   The keys are given in a Long array with the following order
@@ -11,7 +16,7 @@ package cryptography;
   You should have in mind that the keys used should large enough so the module n
   can hold all the values that you want to parse. In this case we parse 
 */
-public class RSA implements Algorithm{
+public class RSACipherAlgorithm implements ControlInterface{
 
     private long n; // n = p*q
     private long fi_n; // fi_n = (p-1)*(q-1)
@@ -29,25 +34,25 @@ public class RSA implements Algorithm{
     }
 
     @Override
-    public void cipher() {
+    public void encrypt() {
         cipherData = "";
         clearData = clearData.trim().toLowerCase();
         for(int i=0;i<clearData.length();i++){
             char clearChar = clearData.charAt(i);
             int clearNumber = (int) clearChar;
             if(clearChar != ' '){ // We take out the spaces.
-                long cipheredNumber = Util.powerMod(clearNumber, e, n);
+                long cipheredNumber = ToolsAlgorithms.powerMod(clearNumber, e, n);
                 cipherData += cipheredNumber + ((i<clearData.length()-1)?",":"");
             }
         }
     }
 
     @Override
-    public void decipher() {
+    public void decrypt() {
         clearData = "";
         for(String token : cipherData.trim().split(",")){
             long cipherNumber = Long.parseLong(token);
-            long clearNumber = Util.powerMod(cipherNumber, d, n);
+            long clearNumber = ToolsAlgorithms.powerMod(cipherNumber, d, n);
             clearData += (char)clearNumber;
         }
     }
@@ -60,10 +65,10 @@ public class RSA implements Algorithm{
         e = keysArray[2];
         n = p*q;
         fi_n = (p-1)*(q-1);
-        if(Util.gcd(e, fi_n)!=1){
+        if(ToolsAlgorithms.gcd(e, fi_n)!=1){
             System.err.println("You're using an invalid public key, e should be coprime with fi_n, euler(n)");
         }
-        d = Util.multiplicativeInverse(e, fi_n);
+        d = ToolsAlgorithms.multiplicativeInverse(e, fi_n);
     }
 
     @Override

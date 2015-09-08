@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography.hill;
+package HillCipherAlgorithm;
 
 import Jama.*;
 import java.awt.image.BufferedImage;
@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
- * Para usar el Hill básico, dejen el parametro iv como <code>null</code>
- * 
- * @author eduarc
+ *
+ * @author Miguel
  */
 public class HillKey {
     

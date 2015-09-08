@@ -1,7 +1,6 @@
 package ui.oeaceoa;
 
 import java.awt.Color;
-import cryptography.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

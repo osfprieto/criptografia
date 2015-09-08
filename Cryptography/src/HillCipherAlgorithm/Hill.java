@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography.hill;
+package HillCipherAlgorithm;
 
 import Jama.Matrix;
-import cryptography.Algorithm;
+import CryptographyAlgorithms.ControlInterface;
 
 /**
  *
- * @author eduarc
+ * @author Miguel
  */
-public class Hill implements Algorithm {
+public class Hill implements ControlInterface {
 
     Matrix[] clearData;
     Matrix[] cipherData;
@@ -24,7 +24,7 @@ public class Hill implements Algorithm {
     }
 
     @Override
-    public void cipher() {
+    public void encrypt() {
         
         if (key == null) {
             throw new IllegalArgumentException("Set a Key at first");
@@ -40,7 +40,7 @@ public class Hill implements Algorithm {
     }
 
     @Override
-    public void decipher() {
+    public void decrypt() {
         
         if (key == null) {
             throw new IllegalArgumentException("Set a Key at first");

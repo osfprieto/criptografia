@@ -5,21 +5,21 @@
  */
 package ui.mmsierrac;
 
-import cryptography.RSA;
+import CryptographyAlgorithms.RSACipherAlgorithm;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Miguel
  */
-public class RSADecipherDialog extends javax.swing.JFrame {
+public class RSACipherGUI extends javax.swing.JFrame {
     
     private Main parent;
 
     /**
      * Creates new form AffineCipherDialog
      */
-    public RSADecipherDialog(Main parent, boolean modal) {
+    public RSACipherGUI(Main parent, boolean modal) {
         this.parent = parent;
         initComponents();
         this.setTitle("Cifrado RSA");
@@ -198,11 +198,11 @@ public class RSADecipherDialog extends javax.swing.JFrame {
             keys[0] = Long.parseLong(this.jTextField1.getText());
             keys[1] = Long.parseLong(this.jTextField2.getText());
             keys[2] = Long.parseLong(this.jTextField3.getText());
-            RSA rsa = new RSA();
+            RSACipherAlgorithm rsa = new RSACipherAlgorithm();
             rsa.setKeys(keys);
-            rsa.setCipherData(parent.jTextArea2.getText());
-            rsa.decipher();
-            parent.jTextArea1.setText((String) rsa.getClearData());
+            rsa.setClearData(parent.jTextArea1.getText());
+            rsa.encrypt();
+            parent.jTextArea2.setText((String) rsa.getCipherData());
             this.setVisible(false);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");

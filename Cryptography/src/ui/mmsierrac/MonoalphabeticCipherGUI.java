@@ -5,24 +5,24 @@
  */
 package ui.mmsierrac;
 
-import cryptography.Permutacion;
+import CryptographyAlgorithms.MonoalphabeticCipherAlgorithm;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Miguel
  */
-public class PermutationCipherDialog extends javax.swing.JFrame {
+public class MonoalphabeticCipherGUI extends javax.swing.JFrame {
     
     private Main parent;
 
     /**
      * Creates new form AffineCipherDialog
      */
-    public PermutationCipherDialog(Main parent, boolean modal) {
+    public MonoalphabeticCipherGUI(Main parent, boolean modal) {
         this.parent = parent;
         initComponents();
-        this.setTitle("Cifrado por Permutación");
+        this.setTitle("Cifrado Monoalfabético");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -46,7 +46,7 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Digite los enteros que desea utilizar como clave del sistema RSA:");
+        jLabel1.setText("Digite la clave que desea utilizar para el criptosistema:");
 
         jToggleButton1.setText("Aceptar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +62,7 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("P:");
+        jLabel2.setText("Clave:");
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(59, 30));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(59, 30));
@@ -83,19 +83,20 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
-                .addGap(32, 32, 32)
-                .addComponent(jToggleButton2)
-                .addGap(70, 70, 70))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jToggleButton1)
+                        .addGap(46, 46, 46)
+                        .addComponent(jToggleButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,8 +112,8 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2))
+                    .addComponent(jToggleButton2)
+                    .addComponent(jToggleButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -120,13 +121,13 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -139,12 +140,19 @@ public class PermutationCipherDialog extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            Permutacion permutacion = new Permutacion();
-            permutacion.setKeys(this.jTextField1.getText());
-            permutacion.setClearData(parent.jTextArea1.getText());
-            permutacion.cipher();
-            parent.jTextArea2.setText((String) permutacion.getCipherData());
-            this.setVisible(false);
+        String a = this.jTextField1.getText();
+        //abcdefghijklmnopqrstuvwxyz
+            if(a.length()==26){
+                MonoalphabeticCipherAlgorithm dialog = new MonoalphabeticCipherAlgorithm();
+                dialog.setPlainText(parent.jTextArea1.getText());
+                dialog.setKey(a);
+                dialog.convert(a);
+                dialog.encrypt();
+                parent.jTextArea2.setText(dialog.getCipherText());
+                this.setVisible(false);
+            }else{
+                    JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
+            }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
         }

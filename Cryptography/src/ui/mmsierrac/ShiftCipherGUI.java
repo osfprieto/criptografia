@@ -5,26 +5,30 @@
  */
 package ui.mmsierrac;
 
-import cryptography.VigenereCipher;
+import CryptographyAlgorithms.ShiftCipherAlgorithm;
 
 /**
  *
  * @author Tato
  */
-public class VigenereDecipherDialog extends javax.swing.JDialog {
+public class ShiftCipherGUI extends javax.swing.JDialog {
 
     /**
-     * Creates new form VigenereDecipherDialog
+     * Creates new form ShiftCipherGUI
      */
     private String plainText;
     private String cipherText;
     
-    public VigenereDecipherDialog(Main parent, boolean modal) {
+    public ShiftCipherGUI(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Descifrado Vigenere");
+        this.setTitle("Cifrado por Desplazamiento");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+    }
+    
+    public String getCipherText() {
+        return this.cipherText;
     }
 
     /**
@@ -36,30 +40,30 @@ public class VigenereDecipherDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tfKey = new javax.swing.JTextField();
+        btnCifrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        tfKeyword = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        btnDescifar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Keyword");
-
-        tfKeyword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfKeyword.addActionListener(new java.awt.event.ActionListener() {
+        tfKey.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfKey.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfKeywordActionPerformed(evt);
+                tfKeyActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Posible palabra clave para decifrar el texto");
-
-        btnDescifar.setText("Descifrar");
-        btnDescifar.addActionListener(new java.awt.event.ActionListener() {
+        btnCifrar.setText("Cifrar");
+        btnCifrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDescifarActionPerformed(evt);
+                btnCifrarActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Key");
+
+        jLabel2.setText("La clave debe ser un entero positivo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,56 +72,57 @@ public class VigenereDecipherDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel1))
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(tfKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(146, 146, 146)
+                        .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(btnDescifar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(137, 137, 137)
+                        .addComponent(btnCifrar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel1)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDescifar)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(btnCifrar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKeywordActionPerformed
+    private void tfKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKeyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfKeywordActionPerformed
+    }//GEN-LAST:event_tfKeyActionPerformed
 
-    private void btnDescifarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescifarActionPerformed
+    private void btnCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCifrarActionPerformed
         // TODO add your handling code here:
-        VigenereCipher encryptor = new VigenereCipher();
-        encryptor.setCipherData(getCipherText());
-        encryptor.setKeys(this.tfKeyword.getText());
-        encryptor.decipher();
-        this.setPlainText((String)encryptor.getClearData());           
+        
+        ShiftCipherAlgorithm encryptor = new ShiftCipherAlgorithm();
+        encryptor.setClearData(getPlainText());
+        encryptor.setKeys((String) this.tfKey.getText());
+        encryptor.encrypt();
+        this.setCipherText((String) encryptor.getCipherData());        
         this.hide();
-    }//GEN-LAST:event_btnDescifarActionPerformed
+    }//GEN-LAST:event_btnCifrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDescifar;
+    private javax.swing.JButton btnCifrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField tfKeyword;
+    private javax.swing.JTextField tfKey;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -132,13 +137,6 @@ public class VigenereDecipherDialog extends javax.swing.JDialog {
      */
     public void setPlainText(String plainText) {
         this.plainText = plainText;
-    }
-
-    /**
-     * @return the cipherText
-     */
-    public String getCipherText() {
-        return cipherText;
     }
 
     /**

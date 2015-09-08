@@ -5,13 +5,13 @@
  */
 package ui.mmsierrac;
 
-import cryptography.ShiftCipher;
+import CryptographyAlgorithms.ShiftCipherAlgorithm;
 
 /**
  *
  * @author Tato
  */
-public class ShiftDecipherDialog extends javax.swing.JDialog {
+public class ShiftDecipherGUI extends javax.swing.JDialog {
 
     /**
      * Creates new form ShiftDecipher
@@ -19,7 +19,7 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
     private String plainText;
     private String cipherText;
     
-    public ShiftDecipherDialog(Main parent, boolean modal) {
+    public ShiftDecipherGUI(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setTitle("Descifrado por Desplazamiento");
@@ -80,9 +80,9 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
 
     private void btnDescifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescifrarActionPerformed
         // TODO add your handling code here:
-        ShiftCipher encryptor = new ShiftCipher();
+        ShiftCipherAlgorithm encryptor = new ShiftCipherAlgorithm();
         encryptor.setCipherData(getCipherText());
-        encryptor.decipher();
+        encryptor.decrypt();
         this.setPlainText((String)encryptor.getClearData());           
         this.hide();
     }//GEN-LAST:event_btnDescifrarActionPerformed

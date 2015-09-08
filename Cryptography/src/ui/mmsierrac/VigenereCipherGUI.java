@@ -5,30 +5,27 @@
  */
 package ui.mmsierrac;
 
-import cryptography.ShiftCipher;
+
+import CryptographyAlgorithms.VigenereCipherAlgorithm;
 
 /**
  *
  * @author Tato
  */
-public class ShiftCipherDialog extends javax.swing.JDialog {
+public class VigenereCipherGUI extends javax.swing.JDialog {
 
     /**
-     * Creates new form ShiftCipherDialog
+     * Creates new form VigenereCipherGUI
      */
     private String plainText;
     private String cipherText;
     
-    public ShiftCipherDialog(Main parent, boolean modal) {
+    public VigenereCipherGUI(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Cifrado por Desplazamiento");
+        this.setTitle("Cifrado Vigenere");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-    }
-    
-    public String getCipherText() {
-        return this.cipherText;
     }
 
     /**
@@ -40,19 +37,18 @@ public class ShiftCipherDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tfKey = new javax.swing.JTextField();
-        btnCifrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        tfKeyWord = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnCifrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tfKey.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfKey.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfKeyActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Keyword");
+
+        tfKeyWord.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel2.setText("La clave debe ser una \"palabra\" o permutación de letras del alfabeto");
 
         btnCifrar.setText("Cifrar");
         btnCifrar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,10 +57,6 @@ public class ShiftCipherDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Key");
-
-        jLabel2.setText("La clave debe ser un entero positivo");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,57 +64,54 @@ public class ShiftCipherDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel2))
+                        .addGap(163, 163, 163)
+                        .addComponent(tfKeyWord, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(btnCifrar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jLabel1)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addGap(192, 192, 192)
+                        .addComponent(btnCifrar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tfKeyWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCifrar)
-                .addContainerGap())
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfKeyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfKeyActionPerformed
-
     private void btnCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCifrarActionPerformed
         // TODO add your handling code here:
-        
-        ShiftCipher encryptor = new ShiftCipher();
+        VigenereCipherAlgorithm encryptor = new VigenereCipherAlgorithm();
         encryptor.setClearData(getPlainText());
-        encryptor.setKeys((String) this.tfKey.getText());
-        encryptor.cipher();
+        encryptor.setKeys((String) this.tfKeyWord.getText());
+        encryptor.encrypt();
         this.setCipherText((String) encryptor.getCipherData());        
         this.hide();
     }//GEN-LAST:event_btnCifrarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCifrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField tfKey;
+    private javax.swing.JTextField tfKeyWord;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -137,6 +126,13 @@ public class ShiftCipherDialog extends javax.swing.JDialog {
      */
     public void setPlainText(String plainText) {
         this.plainText = plainText;
+    }
+
+    /**
+     * @return the cipherText
+     */
+    public String getCipherText() {
+        return cipherText;
     }
 
     /**

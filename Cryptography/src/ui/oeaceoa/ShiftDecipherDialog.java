@@ -5,7 +5,7 @@
  */
 package ui.oeaceoa;
 
-import cryptography.ShiftCipher;
+import CryptographyAlgorithms.ShiftCipherAlgorithm;
 
 /**
  *
@@ -80,9 +80,9 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
 
     private void btnDescifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescifrarActionPerformed
         // TODO add your handling code here:
-        ShiftCipher encryptor = new ShiftCipher();
+        ShiftCipherAlgorithm encryptor = new ShiftCipherAlgorithm();
         encryptor.setCipherData(getCipherText());
-        encryptor.decipher();
+        encryptor.decrypt();
         this.setPlainText((String)encryptor.getClearData());           
         this.hide();
     }//GEN-LAST:event_btnDescifrarActionPerformed

@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
 
 /**
- * @author OmarSimónFrancisco
+ *
+ * @author Miguel
+ */
+
+/*
  * 
  * La llave de este cifrado es una cadena de texto con el orden en el que se
  * reordenan los caracteres de cada bloque.
@@ -21,7 +25,7 @@ package cryptography;
  * 3, 2, 1, 4, 5, 0
  * 
  */
-public class Permutacion implements Algorithm{
+public class PermutacionCipherAlgorithm implements ControlInterface{
 
     private String clearData;
     private String cipherData;
@@ -34,7 +38,7 @@ public class Permutacion implements Algorithm{
     }
 
     @Override
-    public void cipher() {
+    public void encrypt() {
         cipherData = "";
                
         int index = 0;
@@ -56,7 +60,7 @@ public class Permutacion implements Algorithm{
     }
 
     @Override
-    public void decipher() {
+    public void decrypt() {
         clearData = "";
         
         int index = 0;

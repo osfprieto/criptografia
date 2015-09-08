@@ -3,13 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
+
+/**
+ *
+ * @author Miguel
+ */
 
 /*
  * Class with different methods that will come in handy when implementing the
  * cipher algorithms.
  */
-public class Util {
+public class ToolsAlgorithms {
     
     // Returns the value for (base^pow) % mod;
     public static  long  powerMod(long base, long pow, long mod) {

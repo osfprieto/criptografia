@@ -5,9 +5,7 @@
  */
 package ui.mmsierrac;
 
-import cryptography.MonoalphabeticCipher;
-import cryptography.AffineCipher;
-import cryptography.Permutacion;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -93,6 +91,39 @@ public class Main extends javax.swing.JFrame {
 
         jLabel3.setText("Digite aquí su texto cifrado:");
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(128, 128, 128))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
+        );
+
         jButton1.setText("Cifrar");
         jButton1.setPreferredSize(new java.awt.Dimension(99, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,11 +154,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(64, 64, 64)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(105, 105, 105))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,51 +171,22 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -192,37 +194,43 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento"){
-            ShiftCipherDialog dialog = new ShiftCipherDialog(this, true);
-            dialog.setPlainText(this.jTextArea1.getText());
-            dialog.setVisible(true);
-            this.jTextArea2.setText(dialog.getCipherText());                
+        if (jTextArea1.getText().length() > 0) {
+            if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento") {
+                ShiftCipherGUI dialog = new ShiftCipherGUI(this, true);
+                dialog.setPlainText(this.jTextArea1.getText());
+                dialog.setVisible(true);
+                this.jTextArea2.setText(dialog.getCipherText());
+            } else if (jComboBox1.getSelectedItem() == "Criptosistema Afin") {
+                AffineCipherGUI affineCipherDialog = new AffineCipherGUI(this, true);
+                affineCipherDialog.setVisible(true);
             }
-        else if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
-            AffineCipherDialog affineCipherDialog =  new AffineCipherDialog(this, true);
-            affineCipherDialog.setVisible(true);
+            if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion") {
+                MonoalphabeticCipherGUI monoalphabeticDialog = new MonoalphabeticCipherGUI(this, true);
+                monoalphabeticDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "RSA") {
+                RSACipherGUI rsaCipherDialog = new RSACipherGUI(this, true);
+                rsaCipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere") {
+                VigenereCipherGUI dialog = new VigenereCipherGUI(this, true);
+                dialog.setPlainText(this.jTextArea1.getText());
+                dialog.setVisible(true);
+                this.jTextArea2.setText(dialog.getCipherText());
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill") {
+            }
+            if (jComboBox1.getSelectedItem() == "Sistema de Permutacion") {
+                PermutationCipherGUI permutationCipherDialog = new PermutationCipherGUI(this, true);
+                permutationCipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado") {
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes") {
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ningún texto para cifrar");
         }
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
-            MonoalphabeticCipherDialog monoalphabeticDialog = new MonoalphabeticCipherDialog(this, true);
-            monoalphabeticDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "RSA"){
-            RSACipherDialog rsaCipherDialog = new RSACipherDialog(this, true);
-            rsaCipherDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){
-            VigenereCipherDialog dialog = new VigenereCipherDialog(this, true);
-            dialog.setPlainText(this.jTextArea1.getText());
-            dialog.setVisible(true);
-            this.jTextArea2.setText(dialog.getCipherText());
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill"){}
-        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){
-            PermutationCipherDialog permutationCipherDialog = new PermutationCipherDialog(this, true);
-            permutationCipherDialog.setVisible(true);        
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes"){}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -231,52 +239,67 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento"){
-            ShiftDecipherDialog dialog = new ShiftDecipherDialog(this, true);
-            dialog.setCipherText(this.jTextArea2.getText());
-            dialog.setVisible(true);
-            this.jTextArea1.setText(dialog.getPlainText());
+        if (jTextArea1.getText().length() > 0) {
+            if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento") {
+                ShiftDecipherGUI dialog = new ShiftDecipherGUI(this, true);
+                dialog.setCipherText(this.jTextArea2.getText());
+                dialog.setVisible(true);
+                this.jTextArea1.setText(dialog.getPlainText());
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema Afin") {
+                AffineDecipherGUI affineDecipherDialog = new AffineDecipherGUI(this, true);
+                affineDecipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion") {
+                MonoalphabeticDecipherGUI monoalphabeticDecipherDialog = new MonoalphabeticDecipherGUI(this, true);
+                monoalphabeticDecipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "RSA") {
+                RSADecipherGUI rsaDecipherDialog = new RSADecipherGUI(this, true);
+                rsaDecipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere") {
+                VigenereDecipherGUI dialog = new VigenereDecipherGUI(this, true);
+                dialog.setCipherText(this.jTextArea2.getText());
+                dialog.setVisible(true);
+                this.jTextArea1.setText(dialog.getPlainText());
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill") {
+            }
+            if (jComboBox1.getSelectedItem() == "Sistema de Permutacion") {
+                PermutationDecipherGUI permutationDecipherDialog = new PermutationDecipherGUI(this, true);
+                permutationDecipherDialog.setVisible(true);
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado") {
+            }
+            if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes") {
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ningún texto para cifrar");
         }
-        if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
-            AffineDecipherDialog affineDecipherDialog =  new AffineDecipherDialog(this, true);
-            affineDecipherDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
-            MonoalphabeticDecipherDialog monoalphabeticDecipherDialog = new MonoalphabeticDecipherDialog(this, true);
-            monoalphabeticDecipherDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "RSA"){
-            RSADecipherDialog rsaDecipherDialog = new RSADecipherDialog(this, true);
-            rsaDecipherDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){
-            VigenereDecipherDialog dialog = new VigenereDecipherDialog(this, true);
-            dialog.setCipherText(this.jTextArea2.getText());
-            dialog.setVisible(true);
-            this.jTextArea1.setText(dialog.getPlainText());
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill"){}
-        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){
-            PermutationDecipherDialog permutationDecipherDialog = new PermutationDecipherDialog(this, true);
-            permutationDecipherDialog.setVisible(true);
-        }
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes"){}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento"){
-            
+        if (jComboBox1.getSelectedItem() == "Criptosistema por Desplazamiento") {
+
         }
-        if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){}
-        if (jComboBox1.getSelectedItem() == "RSA"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill"){}
-        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado"){}
-        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes"){}
+        if (jComboBox1.getSelectedItem() == "Criptosistema Afin") {
+        }
+        if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion") {
+        }
+        if (jComboBox1.getSelectedItem() == "RSA") {
+        }
+        if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere") {
+        }
+        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill") {
+        }
+        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion") {
+        }
+        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado") {
+        }
+        if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes") {
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

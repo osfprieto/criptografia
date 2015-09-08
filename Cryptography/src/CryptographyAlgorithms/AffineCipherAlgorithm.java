@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
 
 import java.math.BigInteger;
 
@@ -11,49 +11,50 @@ import java.math.BigInteger;
  *
  * @author Miguel
  */
-public class AffineCipher {
-    
+public class AffineCipherAlgorithm {
+
     private String plainText;
     private String cipherText;
     private int firstKey = 5;
     private int secondKey = 19;
-    private int module = 26;
-    
-    public AffineCipher(){}
-    
-    public String encryptionMessage(String input) {
-    StringBuilder builder = new StringBuilder();
-    for (int in = 0; in < input.length(); in++) {
-        char character = input.charAt(in);
-        if (Character.isLetter(character)) {
-            character = (char) ((firstKey * (character - 'a') + secondKey) % module + 'a');
-        }
-        builder.append(character);
+    private final int module = 26;
+
+    public AffineCipherAlgorithm() {
     }
-    return builder.toString();
-}
+
+    public String encryptionMessage(String input) {
+        StringBuilder builder = new StringBuilder();
+        for (int in = 0; in < input.length(); in++) {
+            char character = input.charAt(in);
+            if (Character.isLetter(character)) {
+                character = (char) ((firstKey * (character - 'a') + secondKey) % module + 'a');
+            }
+            builder.append(character);
+        }
+        return builder.toString();
+    }
 
     public String decryptionMessage(String input) {
-    StringBuilder builder = new StringBuilder();
-    // compute firstKey^-1 aka "modular inverse"
-    BigInteger inverse = BigInteger.valueOf(firstKey).modInverse(BigInteger.valueOf(module));
-    // perform actual decryption
-    for (int in = 0; in < input.length(); in++) {
-        char character = input.charAt(in);
-        if (Character.isLetter(character)) {
-            int decoded = inverse.intValue() * (character - 'a' - secondKey + module);
-            character = (char) (decoded % module + 'a');
+        StringBuilder builder = new StringBuilder();
+        // compute firstKey^-1 aka "modular inverse"
+        BigInteger inverse = BigInteger.valueOf(firstKey).modInverse(BigInteger.valueOf(module));
+        // perform actual decryption
+        for (int in = 0; in < input.length(); in++) {
+            char character = input.charAt(in);
+            if (Character.isLetter(character)) {
+                int decoded = inverse.intValue() * (character - 'a' - secondKey + module);
+                character = (char) (decoded % module + 'a');
+            }
+            builder.append(character);
         }
-        builder.append(character);
+        return builder.toString();
     }
-    return builder.toString();
-}
-    
-    public void encryp(){
+
+    public void encryp() {
         setCipherText(encryptionMessage(getPlainText()));
     }
-    
-    public void decryp(){
+
+    public void decryp() {
         setPlainText(decryptionMessage(getCipherText()));
     }
 
@@ -87,5 +88,5 @@ public class AffineCipher {
 
     public void setSecondKey(int secondKey) {
         this.secondKey = secondKey;
-    } 
+    }
 }

@@ -3,21 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+
+package CryptographyAlgorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Miguel
+ */
 
 // For this you should send the String representation of integer number
 // that you want to use as a key. 
-public class ShiftCipher implements Algorithm {
+public class ShiftCipherAlgorithm implements ControlInterface {
     
     private String plainText;
     private String key;
     private String cipherText;
     
-    public ShiftCipher()
+    public ShiftCipherAlgorithm()
     {
     }
 
@@ -101,7 +106,7 @@ public class ShiftCipher implements Algorithm {
     }
 
     @Override
-    public void cipher() {
+    public void encrypt() {
         List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
@@ -109,7 +114,7 @@ public class ShiftCipher implements Algorithm {
       {
           if(getPlainText().charAt(i) != ' '){
             //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
-              resultInt.add((Util.charToNumber( getPlainText().charAt(i)) + Integer.parseInt(key)) % 26);
+              resultInt.add((ToolsAlgorithms.charToNumber( getPlainText().charAt(i)) + Integer.parseInt(key)) % 26);
              // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
                aux = String.valueOf((char)(resultInt.get(i) + 97));
               result = result + aux; 
@@ -124,7 +129,7 @@ public class ShiftCipher implements Algorithm {
     }
 
     @Override
-    public void decipher() {
+    public void decrypt() {
          List<Integer> resultInt = new ArrayList<Integer>();
         String result = "";
         String aux = "";
@@ -135,7 +140,7 @@ public class ShiftCipher implements Algorithm {
                 {
                  //  System.out.println("Tamaño texto = " + getPlainText().length() + "letra " + i + " = " + getPlainText().charAt(i));
                    if(getCipherText().charAt(i) != ' '){
-                        resultInt.add((Util.charToNumber( getCipherText().charAt(i)) + j) % 26);
+                        resultInt.add((ToolsAlgorithms.charToNumber( getCipherText().charAt(i)) + j) % 26);
                        // System.out.println("nueva letra = " + String.valueOf((char)(resultInt[i] + 97)));
                          aux = String.valueOf((char)(resultInt.get(i) + 97));
                          result = result + aux; 

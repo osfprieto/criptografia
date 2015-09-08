@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cryptography;
+package CryptographyAlgorithms;
 
 /**
  *
  * @author Miguel
  */
-public class MonoalphabeticCipher {
+
+public class MonoalphabeticCipherAlgorithm {
     
     private String plainText;
     private String cipherText;
     private String key;
     
-    public MonoalphabeticCipher(){}
+    public MonoalphabeticCipherAlgorithm(){}
     
     public static char p[]  = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',

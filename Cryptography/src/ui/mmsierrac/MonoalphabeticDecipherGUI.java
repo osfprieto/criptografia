@@ -5,21 +5,21 @@
  */
 package ui.mmsierrac;
 
-import cryptography.MonoalphabeticCipher;
+import CryptographyAlgorithms.MonoalphabeticCipherAlgorithm;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Miguel
  */
-public class MonoalphabeticCipherDialog extends javax.swing.JFrame {
+public class MonoalphabeticDecipherGUI extends javax.swing.JFrame {
     
     private Main parent;
 
     /**
      * Creates new form AffineCipherDialog
      */
-    public MonoalphabeticCipherDialog(Main parent, boolean modal) {
+    public MonoalphabeticDecipherGUI(Main parent, boolean modal) {
         this.parent = parent;
         initComponents();
         this.setTitle("Cifrado Monoalfabético");
@@ -140,18 +140,18 @@ public class MonoalphabeticCipherDialog extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         try{
-        String a = this.jTextField1.getText();
-        //abcdefghijklmnopqrstuvwxyz
+            String a = this.jTextField1.getText();
+            //ehcdafgbijkymnupqrstovwxlz
             if(a.length()==26){
-                MonoalphabeticCipher dialog = new MonoalphabeticCipher();
-                dialog.setPlainText(parent.jTextArea1.getText());
+                MonoalphabeticCipherAlgorithm dialog = new MonoalphabeticCipherAlgorithm();
+                dialog.setCipherText(parent.jTextArea2.getText());
                 dialog.setKey(a);
                 dialog.convert(a);
-                dialog.encrypt();
-                parent.jTextArea2.setText(dialog.getCipherText());
+                dialog.decryp();
+                parent.jTextArea1.setText(dialog.getPlainText());
                 this.setVisible(false);
             }else{
-                    JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
+                JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
             }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");

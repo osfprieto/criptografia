@@ -6,14 +6,14 @@
 package ui.osfprieto;
 
 import Jama.Matrix;
-import cryptography.AffineCipher;
-import cryptography.MonoalphabeticCipher;
-import cryptography.Permutacion;
-import cryptography.RSA;
-import cryptography.ShiftCipher;
-import cryptography.VigenereCipher;
-import cryptography.hill.Hill;
-import cryptography.hill.HillKey;
+import CryptographyAlgorithms.AffineCipherAlgorithm;
+import CryptographyAlgorithms.MonoalphabeticCipherAlgorithm;
+import CryptographyAlgorithms.PermutacionCipherAlgorithm;
+import CryptographyAlgorithms.RSACipherAlgorithm;
+import CryptographyAlgorithms.ShiftCipherAlgorithm;
+import CryptographyAlgorithms.VigenereCipherAlgorithm;
+import HillCipherAlgorithm.Hill;
+import HillCipherAlgorithm.HillKey;
 
 /**
  *
@@ -783,7 +783,7 @@ public class Main extends javax.swing.JFrame {
             jLabelRSAD.setText(rsa.getD()+"");
 
             rsa.setClearData(clearTextAreaRSA.getText());
-            rsa.cipher();
+            rsa.encrypt();
             cipherTextAreaRSA.setText((String) rsa.getCipherData());
         }
     }//GEN-LAST:event_buttonCipherRSAActionPerformed
@@ -800,29 +800,29 @@ public class Main extends javax.swing.JFrame {
             jLabelRSAD.setText(rsa.getD()+"");
 
             rsa.setCipherData(cipherTextAreaRSA.getText());
-            rsa.decipher();
+            rsa.decrypt();
             clearTextAreaRSA.setText((String) rsa.getClearData());
         }
     }//GEN-LAST:event_buttonDecipherRSAActionPerformed
 
     private void buttonDecipherVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherVigenereActionPerformed
-        VigenereCipher vigenere = new VigenereCipher();
+        VigenereCipherAlgorithm vigenere = new VigenereCipherAlgorithm();
         vigenere.setKeys(textFieldVigenereKey.getText());
         vigenere.setCipherData(cipherTextAreaVigenere.getText().toLowerCase());
-        vigenere.decipher();
+        vigenere.decrypt();
         clearTextAreaVigenere.setText((String) vigenere.getClearData());
     }//GEN-LAST:event_buttonDecipherVigenereActionPerformed
 
     private void buttonCipherVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherVigenereActionPerformed
-        VigenereCipher vigenere = new VigenereCipher();
+        VigenereCipherAlgorithm vigenere = new VigenereCipherAlgorithm();
         vigenere.setKeys(textFieldVigenereKey.getText());
         vigenere.setClearData(clearTextAreaVigenere.getText());
-        vigenere.cipher();
+        vigenere.encrypt();
         cipherTextAreaVigenere.setText((String) vigenere.getCipherData());
     }//GEN-LAST:event_buttonCipherVigenereActionPerformed
 
     private void buttonDecipherAfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherAfinActionPerformed
-        AffineCipher afinCipher = new AffineCipher();
+        AffineCipherAlgorithm afinCipher = new AffineCipherAlgorithm();
         afinCipher.setFirstKey((Integer) spinnerKeyAfinA.getValue());
         afinCipher.setSecondKey((Integer) spinnerKeyAfinB.getValue());
         afinCipher.setCipherText(cipherTextAreaAfin.getText().toLowerCase());
@@ -831,7 +831,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDecipherAfinActionPerformed
 
     private void buttonCipherAfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherAfinActionPerformed
-        AffineCipher afinCipher = new AffineCipher();
+        AffineCipherAlgorithm afinCipher = new AffineCipherAlgorithm();
         afinCipher.setFirstKey((Integer) spinnerKeyAfinA.getValue());
         afinCipher.setSecondKey((Integer) spinnerKeyAfinB.getValue());
         afinCipher.setPlainText(clearTextAreaAfin.getText().toLowerCase());
@@ -842,30 +842,30 @@ public class Main extends javax.swing.JFrame {
     private void buttonCipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherShiftActionPerformed
         shift.setKeys(""+spinnerKeyShift.getValue());
         shift.setClearData(clearTextAreaShift.getText());
-        shift.cipher();
+        shift.encrypt();
         cipherTextAreaShift.setText((String)shift.getCipherData());
     }//GEN-LAST:event_buttonCipherShiftActionPerformed
 
     private void buttonDecipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherShiftActionPerformed
         shift.setKeys(""+spinnerKeyShift.getValue());
         shift.setCipherData(cipherTextAreaShift.getText());
-        shift.decipher();
+        shift.decrypt();
         clearTextAreaShift.setText((String)shift.getClearData());
     }//GEN-LAST:event_buttonDecipherShiftActionPerformed
 
     private void buttonCipherPermutacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherPermutacionActionPerformed
-        Permutacion permutacion = new Permutacion();
+        PermutacionCipherAlgorithm permutacion = new PermutacionCipherAlgorithm();
         permutacion.setKeys(textFieldPermutacionKey.getText());
         permutacion.setClearData(clearTextAreaPermutacion.getText());
-        permutacion.cipher();
+        permutacion.encrypt();
         cipherTextAreaPermutacion.setText((String)permutacion.getCipherData());
     }//GEN-LAST:event_buttonCipherPermutacionActionPerformed
 
     private void buttonDecipherPermutacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherPermutacionActionPerformed
-        Permutacion permutacion = new Permutacion();
+        PermutacionCipherAlgorithm permutacion = new PermutacionCipherAlgorithm();
         permutacion.setKeys(textFieldPermutacionKey.getText());
         permutacion.setCipherData(cipherTextAreaPermutacion.getText());
-        permutacion.decipher();
+        permutacion.decrypt();
         clearTextAreaPermutacion.setText((String)permutacion.getClearData());
     }//GEN-LAST:event_buttonDecipherPermutacionActionPerformed
 
@@ -886,7 +886,7 @@ public class Main extends javax.swing.JFrame {
         HillKey hKey = new HillKey(26, m, null, key);
         hill.setKeys(hKey);
         hill.setClearData(hKey.getTextData(clearTextAreaHill.getText().toLowerCase()));
-        hill.cipher();
+        hill.encrypt();
         
         String secret = "";
         Matrix[] secretData = (Matrix[])hill.getCipherData();
@@ -916,7 +916,7 @@ public class Main extends javax.swing.JFrame {
         hill.setKeys(hKey);
         
         hill.setCipherData(hKey.getTextData(cipherTextAreaHill.getText()));
-        hill.decipher();
+        hill.decrypt();
         Matrix[] secretData = (Matrix[])hill.getClearData();
         String secret = "";
         for (int i = 0; i < secretData.length; i++) {
@@ -929,7 +929,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonDecipherHillActionPerformed
 
     private void buttonCipherSustitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherSustitucionActionPerformed
-        MonoalphabeticCipher cipher = new MonoalphabeticCipher();
+        MonoalphabeticCipherAlgorithm cipher = new MonoalphabeticCipherAlgorithm();
         cipher.convert(textFieldSustitucionKey.getText());
         cipher.setPlainText(clearTextAreaSustitucion.getText().toLowerCase());
         cipher.encrypt();
@@ -937,7 +937,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCipherSustitucionActionPerformed
 
     private void buttonDecipherSustitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherSustitucionActionPerformed
-        MonoalphabeticCipher cipher = new MonoalphabeticCipher();
+        MonoalphabeticCipherAlgorithm cipher = new MonoalphabeticCipherAlgorithm();
         cipher.setCipherText(cipherTextAreaSustitucion.getText().toLowerCase());
         cipher.setKey(textFieldSustitucionKey.getText());
         cipher.convert(textFieldSustitucionKey.getText());
@@ -981,8 +981,8 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
-    private ShiftCipher shift = new ShiftCipher();
-    private RSA rsa = new RSA();
+    private ShiftCipherAlgorithm shift = new ShiftCipherAlgorithm();
+    private RSACipherAlgorithm rsa = new RSACipherAlgorithm();
     private Hill hill = new Hill();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
