@@ -202,10 +202,8 @@ public class Main extends javax.swing.JFrame {
             affineCipherDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
-            MonoalphabeticCipher dialog = new MonoalphabeticCipher();
-            dialog.setPlainText(this.jTextArea1.getText());
-            dialog.encrypt();
-            this.jTextArea2.setText(dialog.getCipherText());
+            MonoalphabeticCipherDialog monoalphabeticDialog = new MonoalphabeticCipherDialog(this, true);
+            monoalphabeticDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "RSA"){}
         if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){
@@ -237,10 +235,8 @@ public class Main extends javax.swing.JFrame {
             affineDecipherDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
-            MonoalphabeticCipher dialog = new MonoalphabeticCipher();
-            dialog.setCipherText(this.jTextArea2.getText());
-            dialog.decryp();
-            this.jTextArea1.setText(dialog.getPlainText());
+            MonoalphabeticDecipherDialog monoalphabeticDecipherDialog = new MonoalphabeticDecipherDialog(this, true);
+            monoalphabeticDecipherDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "RSA"){}
         if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){

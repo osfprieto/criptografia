@@ -5,6 +5,8 @@
  */
 package cryptography;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Miguel
@@ -21,11 +23,11 @@ public class MonoalphabeticCipher {
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
             'w', 'x', 'y', 'z' };
     
-    public static char ch[] = { 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O',
+    public char ch[];/* = { 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O',
             'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C',
-            'V', 'B', 'N', 'M' };
+            'V', 'B', 'N', 'M' };*/
  
-    public static String doEncryption(String s)    {
+    public String doEncryption(String s)    {
         char c[] = new char[(s.length())];
         for (int i = 0; i < s.length(); i++){
             for (int j = 0; j < 26; j++){
@@ -38,7 +40,7 @@ public class MonoalphabeticCipher {
         return (new String(c));
     }
  
-    public static String doDecryption(String s){
+    public String doDecryption(String s){
         char p1[] = new char[(s.length())];
         for (int i = 0; i < s.length(); i++){
             for (int j = 0; j < 26; j++){
@@ -80,5 +82,10 @@ public class MonoalphabeticCipher {
 
     public void setKey(String key) {
         this.key = key;
-    } 
+    }
+    
+    public void convert(String key) {
+        this.ch = key.toCharArray();
+        System.out.println(Arrays.toString(ch));
+    }
 }
