@@ -5,7 +5,6 @@
  */
 package ui.osfprieto;
 
-import Jama.Matrix;
 import CryptographyAlgorithms.AffineCipherAlgorithm;
 import CryptographyAlgorithms.MonoalphabeticCipherAlgorithm;
 import CryptographyAlgorithms.PermutacionCipherAlgorithm;
@@ -14,11 +13,11 @@ import CryptographyAlgorithms.ShiftCipherAlgorithm;
 import CryptographyAlgorithms.VigenereCipherAlgorithm;
 import HillCipherAlgorithm.Hill;
 import HillCipherAlgorithm.HillKey;
+import Jama.Matrix;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author OmarSimónFrancisco
- */
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -99,6 +98,19 @@ public class Main extends javax.swing.JFrame {
         textAreaHillMatrix = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        textAreaHillImagesMatrix = new javax.swing.JTextArea();
+        jLabel16 = new javax.swing.JLabel();
+        buttonCipherHillImages = new javax.swing.JButton();
+        buttonDecipherHillImages = new javax.swing.JButton();
+        cipherImageHillImagenes = new javax.swing.JLabel();
+        clearImageHillImagenes = new javax.swing.JLabel();
+        cipherButtonHillImagenesCargar = new javax.swing.JButton();
+        clearButtonHillImagenesCargar = new javax.swing.JButton();
+        clearLabelHillImagenesCargar = new javax.swing.JLabel();
+        cipherLabelHillImagenesCargar = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         buttonDecipherRSA = new javax.swing.JButton();
         buttonCipherRSA = new javax.swing.JButton();
@@ -597,15 +609,121 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Hill", jPanel5);
 
+        textAreaHillImagesMatrix.setColumns(20);
+        textAreaHillImagesMatrix.setRows(5);
+        textAreaHillImagesMatrix.setText("11 6 8\n0 3 14\n24 0 9");
+        jScrollPane16.setViewportView(textAreaHillImagesMatrix);
+
+        jLabel16.setText("Matriz de llave de Hill, debe ser una matriz cuadrada, los números deben estar separados por espacios y debe haber una filla por línea. La matriz debe ser inversible.");
+
+        buttonCipherHillImages.setText("-- Cifrar -->");
+        buttonCipherHillImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCipherHillImagesActionPerformed(evt);
+            }
+        });
+
+        buttonDecipherHillImages.setText("<-- Descifrar --");
+        buttonDecipherHillImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecipherHillImagesActionPerformed(evt);
+            }
+        });
+
+        clearImageHillImagenes.setBackground(new java.awt.Color(255, 255, 255));
+
+        cipherButtonHillImagenesCargar.setText("Cargar imagen cifrada");
+        cipherButtonHillImagenesCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cipherButtonHillImagenesCargarActionPerformed(evt);
+            }
+        });
+
+        clearButtonHillImagenesCargar.setText("Cargar imagen clara");
+        clearButtonHillImagenesCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonHillImagenesCargarActionPerformed(evt);
+            }
+        });
+
+        clearLabelHillImagenesCargar.setText("Ningún archivo seleccionado.");
+
+        cipherLabelHillImagenesCargar.setText("Ningún archivo seleccionado.");
+
+        jLabel17.setText("El esultado es guardado en el mismo directorio del la imagen seleccionada");
+
+        jLabel18.setText("agregando la extensión .clear o .cipher según corresponda.");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jLabel16)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(clearButtonHillImagenesCargar)
+                .addGap(18, 18, 18)
+                .addComponent(clearLabelHillImagenesCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cipherButtonHillImagenesCargar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cipherLabelHillImagenesCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(buttonDecipherHillImages)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(buttonCipherHillImages, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap(31, Short.MAX_VALUE)
+                        .addComponent(clearImageHillImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cipherImageHillImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clearImageHillImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cipherImageHillImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cipherButtonHillImagenesCargar)
+                        .addComponent(cipherLabelHillImagenesCargar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(clearLabelHillImagenesCargar)
+                        .addComponent(clearButtonHillImagenesCargar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(buttonCipherHillImages)
+                        .addGap(26, 26, 26)
+                        .addComponent(buttonDecipherHillImages))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18)))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Hill imágenes", jPanel9);
@@ -945,6 +1063,50 @@ public class Main extends javax.swing.JFrame {
         clearTextAreaSustitucion.setText(cipher.getPlainText().toLowerCase());
     }//GEN-LAST:event_buttonDecipherSustitucionActionPerformed
 
+    private void buttonCipherHillImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherHillImagesActionPerformed
+        JOptionPane.showMessageDialog(this, "Aún se encuentra en desarrollo", "En desarrollo", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_buttonCipherHillImagesActionPerformed
+
+    private void buttonDecipherHillImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherHillImagesActionPerformed
+        JOptionPane.showMessageDialog(this, "Aún se encuentra en desarrollo", "En desarrollo", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_buttonDecipherHillImagesActionPerformed
+
+    private void clearButtonHillImagenesCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonHillImagenesCargarActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Seleccionar");
+        if(result == JFileChooser.APPROVE_OPTION){
+           clearHillImagenesFileLocation = fileChooser.getSelectedFile().getAbsolutePath();
+           cipherHillImagenesFileLocation = clearHillImagenesFileLocation + ".cipher";
+           clearLabelHillImagenesCargar.setText(clearHillImagenesFileLocation);
+           cipherLabelHillImagenesCargar.setText(cipherHillImagenesFileLocation);
+           try{
+               clearImageHillImagenes.setIcon(new ImageIcon(clearHillImagenesFileLocation));
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(this, "No se puede cargar el archivo", "Error al cargar", JOptionPane.ERROR_MESSAGE);
+           }
+        }
+    }//GEN-LAST:event_clearButtonHillImagenesCargarActionPerformed
+
+    private void cipherButtonHillImagenesCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cipherButtonHillImagenesCargarActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setMultiSelectionEnabled(false);
+        int result = fileChooser.showDialog(this, "Seleccionar");
+        if(result == JFileChooser.APPROVE_OPTION){
+           cipherHillImagenesFileLocation = fileChooser.getSelectedFile().getAbsolutePath();
+           clearHillImagenesFileLocation = cipherHillImagenesFileLocation + ".clear";
+           cipherLabelHillImagenesCargar.setText(cipherHillImagenesFileLocation);
+           clearLabelHillImagenesCargar.setText(clearHillImagenesFileLocation);
+           try{
+               cipherImageHillImagenes.setIcon(new ImageIcon(cipherHillImagenesFileLocation));
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(this, "No se puede cargar el archivo", "Error al cargar", JOptionPane.ERROR_MESSAGE);
+           }
+        }
+    }//GEN-LAST:event_cipherButtonHillImagenesCargarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -984,10 +1146,13 @@ public class Main extends javax.swing.JFrame {
     private ShiftCipherAlgorithm shift = new ShiftCipherAlgorithm();
     private RSACipherAlgorithm rsa = new RSACipherAlgorithm();
     private Hill hill = new Hill();
+    private String clearHillImagenesFileLocation = "";
+    private String cipherHillImagenesFileLocation = "";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCipherAfin;
     private javax.swing.JButton buttonCipherHill;
+    private javax.swing.JButton buttonCipherHillImages;
     private javax.swing.JButton buttonCipherPermutacion;
     private javax.swing.JButton buttonCipherRSA;
     private javax.swing.JButton buttonCipherShift;
@@ -995,11 +1160,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton buttonCipherVigenere;
     private javax.swing.JButton buttonDecipherAfin;
     private javax.swing.JButton buttonDecipherHill;
+    private javax.swing.JButton buttonDecipherHillImages;
     private javax.swing.JButton buttonDecipherPermutacion;
     private javax.swing.JButton buttonDecipherRSA;
     private javax.swing.JButton buttonDecipherShift;
     private javax.swing.JButton buttonDecipherSustitucion;
     private javax.swing.JButton buttonDecipherVigenere;
+    private javax.swing.JButton cipherButtonHillImagenesCargar;
+    private javax.swing.JLabel cipherImageHillImagenes;
+    private javax.swing.JLabel cipherLabelHillImagenesCargar;
     private javax.swing.JTextArea cipherTextAreaAfin;
     private javax.swing.JTextArea cipherTextAreaHill;
     private javax.swing.JTextArea cipherTextAreaPermutacion;
@@ -1007,6 +1176,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextArea cipherTextAreaShift;
     private javax.swing.JTextArea cipherTextAreaSustitucion;
     private javax.swing.JTextArea cipherTextAreaVigenere;
+    private javax.swing.JButton clearButtonHillImagenesCargar;
+    private javax.swing.JLabel clearImageHillImagenes;
+    private javax.swing.JLabel clearLabelHillImagenesCargar;
     private javax.swing.JTextArea clearTextAreaAfin;
     private javax.swing.JTextArea clearTextAreaHill;
     private javax.swing.JTextArea clearTextAreaPermutacion;
@@ -1021,6 +1193,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1048,6 +1223,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1060,6 +1236,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerKeyAfinA;
     private javax.swing.JSpinner spinnerKeyAfinB;
     private javax.swing.JSpinner spinnerKeyShift;
+    private javax.swing.JTextArea textAreaHillImagesMatrix;
     private javax.swing.JTextArea textAreaHillMatrix;
     private javax.swing.JTextField textFieldPermutacionKey;
     private javax.swing.JTextField textFieldRSAE;
