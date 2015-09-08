@@ -6,6 +6,7 @@
 package ui.osfprieto;
 
 import cryptography.AffineCipher;
+import cryptography.Permutacion;
 import cryptography.RSA;
 import cryptography.ShiftCipher;
 import cryptography.VigenereCipher;
@@ -65,6 +66,14 @@ public class Main extends javax.swing.JFrame {
         textFieldVigenereKey = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        clearTextAreaPermutacion = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        cipherTextAreaPermutacion = new javax.swing.JTextArea();
+        buttonCipherPermutacion = new javax.swing.JButton();
+        buttonDecipherPermutacion = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        textFieldPermutacionKey = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -341,15 +350,75 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sustitución", jPanel1);
 
+        clearTextAreaPermutacion.setColumns(20);
+        clearTextAreaPermutacion.setRows(5);
+        clearTextAreaPermutacion.setText("Omar Simon Francisco Prieto Chacon");
+        jScrollPane9.setViewportView(clearTextAreaPermutacion);
+
+        cipherTextAreaPermutacion.setColumns(20);
+        cipherTextAreaPermutacion.setRows(5);
+        jScrollPane10.setViewportView(cipherTextAreaPermutacion);
+
+        buttonCipherPermutacion.setText("-- Cifrar -->");
+        buttonCipherPermutacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCipherPermutacionActionPerformed(evt);
+            }
+        });
+
+        buttonDecipherPermutacion.setText("<-- Descifrar --");
+        buttonDecipherPermutacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecipherPermutacionActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Clave: orden permutación a ejecutar, números separados por comas e indexado desde 0.");
+
+        textFieldPermutacionKey.setText("0, 3, 1, 2, 5, 4");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonDecipherPermutacion)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(97, 97, 97)
+                            .addComponent(buttonCipherPermutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel11)))
+                .addContainerGap(232, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(443, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonCipherPermutacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonDecipherPermutacion)
+                .addGap(35, 35, 35))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                        .addComponent(jScrollPane10))
+                    .addContainerGap(150, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Permutación", jPanel6);
@@ -541,7 +610,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
-                .addGap(54, 54, 54))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,6 +702,22 @@ public class Main extends javax.swing.JFrame {
         clearTextAreaShift.setText((String)shift.getClearData());
     }//GEN-LAST:event_buttonDecipherShiftActionPerformed
 
+    private void buttonCipherPermutacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherPermutacionActionPerformed
+        Permutacion permutacion = new Permutacion();
+        permutacion.setKeys(textFieldPermutacionKey.getText());
+        permutacion.setClearData(clearTextAreaPermutacion.getText());
+        permutacion.cipher();
+        cipherTextAreaPermutacion.setText((String)permutacion.getCipherData());
+    }//GEN-LAST:event_buttonCipherPermutacionActionPerformed
+
+    private void buttonDecipherPermutacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherPermutacionActionPerformed
+        Permutacion permutacion = new Permutacion();
+        permutacion.setKeys(textFieldPermutacionKey.getText());
+        permutacion.setCipherData(cipherTextAreaPermutacion.getText());
+        permutacion.decipher();
+        clearTextAreaPermutacion.setText((String)permutacion.getClearData());
+    }//GEN-LAST:event_buttonDecipherPermutacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -674,23 +759,28 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCipherAfin;
+    private javax.swing.JButton buttonCipherPermutacion;
     private javax.swing.JButton buttonCipherRSA;
     private javax.swing.JButton buttonCipherShift;
     private javax.swing.JButton buttonCipherVigenere;
     private javax.swing.JButton buttonDecipherAfin;
+    private javax.swing.JButton buttonDecipherPermutacion;
     private javax.swing.JButton buttonDecipherRSA;
     private javax.swing.JButton buttonDecipherShift;
     private javax.swing.JButton buttonDecipherVigenere;
     private javax.swing.JTextArea cipherTextAreaAfin;
+    private javax.swing.JTextArea cipherTextAreaPermutacion;
     private javax.swing.JTextArea cipherTextAreaRSA;
     private javax.swing.JTextArea cipherTextAreaShift;
     private javax.swing.JTextArea cipherTextAreaVigenere;
     private javax.swing.JTextArea clearTextAreaAfin;
+    private javax.swing.JTextArea clearTextAreaPermutacion;
     private javax.swing.JTextArea clearTextAreaRSA;
     private javax.swing.JTextArea clearTextAreaShift;
     private javax.swing.JTextArea clearTextAreaVigenere;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -713,6 +803,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -720,10 +811,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JSpinner spinnerKeyAfinA;
     private javax.swing.JSpinner spinnerKeyAfinB;
     private javax.swing.JSpinner spinnerKeyShift;
+    private javax.swing.JTextField textFieldPermutacionKey;
     private javax.swing.JTextField textFieldRSAE;
     private javax.swing.JTextField textFieldRSAP;
     private javax.swing.JTextField textFieldRSAQ;
