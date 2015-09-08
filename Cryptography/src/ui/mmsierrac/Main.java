@@ -198,10 +198,8 @@ public class Main extends javax.swing.JFrame {
             this.jTextArea2.setText(dialog.getCipherText());                
             }
         else if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
-            AffineCipher affineCipher = new AffineCipher();
-            affineCipher.setPlainText(this.jTextArea1.getText());
-            affineCipher.encryp();
-            this.jTextArea2.setText(affineCipher.getCipherText());
+            AffineCipherDialog affineCipherDialog =  new AffineCipherDialog(this, true);
+            affineCipherDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
             MonoalphabeticCipher dialog = new MonoalphabeticCipher();
@@ -235,10 +233,8 @@ public class Main extends javax.swing.JFrame {
             this.jTextArea1.setText(dialog.getPlainText());
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema Afin"){
-            AffineCipher affineCipher = new AffineCipher();
-            affineCipher.setCipherText(this.jTextArea2.getText());
-            affineCipher.decryp();
-            this.jTextArea1.setText(affineCipher.getPlainText());
+            AffineDecipherDialog affineDecipherDialog =  new AffineDecipherDialog(this, true);
+            affineDecipherDialog.setVisible(true);
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema por Sustitucion"){
             MonoalphabeticCipher dialog = new MonoalphabeticCipher();
@@ -322,7 +318,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    public javax.swing.JTextArea jTextArea1;
+    public javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
 }
