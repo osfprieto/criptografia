@@ -142,19 +142,19 @@ public class MonoalphabeticDecipherDialog extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         try{
-        String a = this.jTextField1.getText();
-        //ehcdafgbijkymnupqrstovwxlz
-        System.out.println(a.length());
-        if(a.length()==26){
-            MonoalphabeticCipher dialog = new MonoalphabeticCipher();
-            dialog.setCipherText(parent.jTextArea2.getText());
-            dialog.setKey(a);
-            dialog.convert(a);
-            dialog.decryp();
-            System.out.println(dialog.getPlainText());
-            parent.jTextArea1.setText(dialog.getPlainText());
-            this.setVisible(false);
-        }
+            String a = this.jTextField1.getText();
+            //ehcdafgbijkymnupqrstovwxlz
+            if(a.length()==26){
+                MonoalphabeticCipher dialog = new MonoalphabeticCipher();
+                dialog.setCipherText(parent.jTextArea2.getText());
+                dialog.setKey(a);
+                dialog.convert(a);
+                dialog.decryp();
+                parent.jTextArea1.setText(dialog.getPlainText());
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
+            }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
         }

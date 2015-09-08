@@ -144,17 +144,17 @@ public class MonoalphabeticCipherDialog extends javax.swing.JFrame {
         try{
         String a = this.jTextField1.getText();
         //abcdefghijklmnopqrstuvwxyz
-        System.out.println("a");
-        System.out.println(a.length());
-        if(a.length()==26){
-            MonoalphabeticCipher dialog = new MonoalphabeticCipher();
-            dialog.setPlainText(parent.jTextArea1.getText());
-            dialog.setKey(a);
-            dialog.convert(a);
-            dialog.encrypt();
-            parent.jTextArea2.setText(dialog.getCipherText());
-            this.setVisible(false);
-        }
+            if(a.length()==26){
+                MonoalphabeticCipher dialog = new MonoalphabeticCipher();
+                dialog.setPlainText(parent.jTextArea1.getText());
+                dialog.setKey(a);
+                dialog.convert(a);
+                dialog.encrypt();
+                parent.jTextArea2.setText(dialog.getCipherText());
+                this.setVisible(false);
+            }else{
+                    JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
+            }
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Por favor, revise los criterios");
         }
