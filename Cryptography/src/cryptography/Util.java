@@ -120,33 +120,4 @@ public class Util {
             System.err.println("Trying to parse an out of bounds number into a character");
         return (char) ('a'+number);
     }
-    
-    
-    
-    //For testing
-    public static void main(String[] args){
-        //powermod
-        System.out.println(powerMod(2, 5, 3)); // 2
-        
-        // mmult
-        double[][] a = new double[5][3];
-        double[][] b = new double[3][5];
-        
-        for(int i=0;i<15;i++){
-            a[i/3][i%3] = 1;
-            b[i/5][i%5] = 1;
-        }
-        
-        printMatrix(a);
-        printMatrix(b);
-        printMatrix(mmult(a, b));
-        
-        //gcd
-        System.out.println(gcd(23, 43));
-        
-        // multiplicative inverse
-        System.out.println(multiplicativeInverse(8+23*5, 23)); //3
-        System.out.println(multiplicativeInverse(1892, 23187));
-        System.out.println(multiplicativeInverse(11, 6*4)); 
-    }
 }

@@ -22,7 +22,7 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
     public ShiftDecipherDialog(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Descifrado por desplazamiento");
+        this.setTitle("Descifrado por Desplazamiento");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

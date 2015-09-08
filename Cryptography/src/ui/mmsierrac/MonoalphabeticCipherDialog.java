@@ -5,8 +5,6 @@
  */
 package ui.mmsierrac;
 
-import cryptography.PrimoRelativo;
-import cryptography.AffineCipher;
 import cryptography.MonoalphabeticCipher;
 import javax.swing.JOptionPane;
 
@@ -24,7 +22,7 @@ public class MonoalphabeticCipherDialog extends javax.swing.JFrame {
     public MonoalphabeticCipherDialog(Main parent, boolean modal) {
         this.parent = parent;
         initComponents();
-        this.setTitle("Cifrado Afín");
+        this.setTitle("Cifrado Monoalfabético");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

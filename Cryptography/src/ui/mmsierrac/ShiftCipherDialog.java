@@ -22,7 +22,7 @@ public class ShiftCipherDialog extends javax.swing.JDialog {
     public ShiftCipherDialog(Main parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Cifrado por desplazamiento");
+        this.setTitle("Cifrado por Desplazamiento");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }

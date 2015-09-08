@@ -7,6 +7,7 @@ package ui.mmsierrac;
 
 import cryptography.MonoalphabeticCipher;
 import cryptography.AffineCipher;
+import cryptography.Permutacion;
 
 /**
  *
@@ -205,7 +206,10 @@ public class Main extends javax.swing.JFrame {
             MonoalphabeticCipherDialog monoalphabeticDialog = new MonoalphabeticCipherDialog(this, true);
             monoalphabeticDialog.setVisible(true);
         }
-        if (jComboBox1.getSelectedItem() == "RSA"){}
+        if (jComboBox1.getSelectedItem() == "RSA"){
+            RSACipherDialog rsaCipherDialog = new RSACipherDialog(this, true);
+            rsaCipherDialog.setVisible(true);
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){
             VigenereCipherDialog dialog = new VigenereCipherDialog(this, true);
             dialog.setPlainText(this.jTextArea1.getText());
@@ -213,7 +217,10 @@ public class Main extends javax.swing.JFrame {
             this.jTextArea2.setText(dialog.getCipherText());
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill"){}
-        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){}
+        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){
+            PermutationCipherDialog permutationCipherDialog = new PermutationCipherDialog(this, true);
+            permutationCipherDialog.setVisible(true);        
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado"){}
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes"){}
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -238,7 +245,10 @@ public class Main extends javax.swing.JFrame {
             MonoalphabeticDecipherDialog monoalphabeticDecipherDialog = new MonoalphabeticDecipherDialog(this, true);
             monoalphabeticDecipherDialog.setVisible(true);
         }
-        if (jComboBox1.getSelectedItem() == "RSA"){}
+        if (jComboBox1.getSelectedItem() == "RSA"){
+            RSADecipherDialog rsaDecipherDialog = new RSADecipherDialog(this, true);
+            rsaDecipherDialog.setVisible(true);
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Vigenere"){
             VigenereDecipherDialog dialog = new VigenereDecipherDialog(this, true);
             dialog.setCipherText(this.jTextArea2.getText());
@@ -246,7 +256,10 @@ public class Main extends javax.swing.JFrame {
             this.jTextArea1.setText(dialog.getPlainText());
         }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill"){}
-        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){}
+        if (jComboBox1.getSelectedItem() == "Sistema de Permutacion"){
+            PermutationDecipherDialog permutationDecipherDialog = new PermutationDecipherDialog(this, true);
+            permutationDecipherDialog.setVisible(true);
+        }
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill Mejorado"){}
         if (jComboBox1.getSelectedItem() == "Criptosistema de Hill para Imagenes"){}
     }//GEN-LAST:event_jButton2ActionPerformed
