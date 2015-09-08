@@ -5,11 +5,14 @@
  */
 package ui.osfprieto;
 
+import Jama.Matrix;
 import cryptography.AffineCipher;
 import cryptography.Permutacion;
 import cryptography.RSA;
 import cryptography.ShiftCipher;
 import cryptography.VigenereCipher;
+import cryptography.hill.Hill;
+import cryptography.hill.HillKey;
 
 /**
  *
@@ -55,6 +58,8 @@ public class Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         spinnerKeyAfinB = new javax.swing.JSpinner();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         clearTextAreaVigenere = new javax.swing.JTextArea();
@@ -75,7 +80,15 @@ public class Main extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         textFieldPermutacionKey = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        clearTextAreaHill = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        cipherTextAreaHill = new javax.swing.JTextArea();
+        buttonCipherHill = new javax.swing.JButton();
+        buttonDecipherHill = new javax.swing.JButton();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        textAreaHillMatrix = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         buttonDecipherRSA = new javax.swing.JButton();
@@ -117,7 +130,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Translación - Llave");
+        jLabel1.setText("Translación - Llave para translación, número entre 0 y 26");
 
         buttonCipherShift.setText("-- Cifrar -->");
         buttonCipherShift.addActionListener(new java.awt.event.ActionListener() {
@@ -143,14 +156,14 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(spinnerKeyShift)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinnerKeyShift, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,6 +221,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel9.setText("Key B");
 
+        jLabel13.setText("E(x) = (Ax + B) mod 26");
+
+        jLabel14.setText("D(y) = A^-1(x - B) mod 26");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -216,18 +233,22 @@ public class Main extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(spinnerKeyAfinB, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spinnerKeyAfinB, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(151, 151, 151)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonDecipherAfin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCipherAfin, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -239,14 +260,19 @@ public class Main extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(456, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCipherAfin)
-                    .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                .addContainerGap(447, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonCipherAfin)
+                        .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addGap(4, 4, 4)
                         .addComponent(buttonDecipherAfin))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
@@ -288,7 +314,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Palabra clave");
+        jLabel10.setText("Palabra clave, sin espacios");
 
         textFieldVigenereKey.setText("clavesecreta");
 
@@ -383,15 +409,15 @@ public class Main extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buttonDecipherPermutacion)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(97, 97, 97)
-                            .addComponent(buttonCipherPermutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel11)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttonDecipherPermutacion)
+                            .addComponent(buttonCipherPermutacion, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel11))
+                .addContainerGap(408, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addContainerGap()
@@ -403,15 +429,18 @@ public class Main extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(443, Short.MAX_VALUE)
+                .addContainerGap(444, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonCipherPermutacion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonDecipherPermutacion)
-                .addGap(35, 35, 35))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(textFieldPermutacionKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(buttonCipherPermutacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonDecipherPermutacion)
+                        .addGap(23, 23, 23))))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(29, 29, 29)
@@ -423,31 +452,77 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Permutación", jPanel6);
 
+        clearTextAreaHill.setColumns(20);
+        clearTextAreaHill.setRows(5);
+        clearTextAreaHill.setText("Omar Simon Francisco Prieto Chacon");
+        jScrollPane11.setViewportView(clearTextAreaHill);
+
+        cipherTextAreaHill.setColumns(20);
+        cipherTextAreaHill.setRows(5);
+        jScrollPane12.setViewportView(cipherTextAreaHill);
+
+        buttonCipherHill.setText("-- Cifrar -->");
+        buttonCipherHill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCipherHillActionPerformed(evt);
+            }
+        });
+
+        buttonDecipherHill.setText("<-- Descifrar --");
+        buttonDecipherHill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecipherHillActionPerformed(evt);
+            }
+        });
+
+        textAreaHillMatrix.setColumns(20);
+        textAreaHillMatrix.setRows(5);
+        textAreaHillMatrix.setText("11 6 8\n0 3 14\n24 0 9");
+        jScrollPane13.setViewportView(textAreaHillMatrix);
+
+        jLabel12.setText("Matriz de llave de Hill, debe ser una matriz cuadrada, los números deben estar separados por espacios y debe haber una filla por línea. La matriz debe ser inversible.");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonCipherHill, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonDecipherHill)))
+                    .addComponent(jLabel12))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12))
+                .addGap(38, 38, 38)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(buttonCipherHill)
+                        .addGap(26, 26, 26)
+                        .addComponent(buttonDecipherHill)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hill", jPanel5);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Hill mejorado", jPanel7);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -485,13 +560,13 @@ public class Main extends javax.swing.JFrame {
         cipherTextAreaRSA.setRows(5);
         jScrollPane4.setViewportView(cipherTextAreaRSA);
 
-        jLabel2.setText("P");
+        jLabel2.setText("P (primo)");
         jLabel2.setToolTipText("Número primo para generación del módulo a utilizar junto con Q");
 
-        jLabel3.setText("Q");
+        jLabel3.setText("Q (primo)");
         jLabel3.setToolTipText("Número primo para generación del módulo a utilizar junto con P");
 
-        jLabel4.setText("E (pública)");
+        jLabel4.setText("E (pública, coprimo a Euler(N))");
         jLabel4.setToolTipText("Llave pública de cifrado");
 
         jLabel5.setText("N (pública)");
@@ -532,7 +607,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
@@ -542,7 +617,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(textFieldRSAQ, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldRSAE, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldRSAP, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonDecipherRSA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCipherRSA, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -561,43 +636,46 @@ public class Main extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(buttonCipherRSA)
-                        .addGap(40, 40, 40)
-                        .addComponent(buttonDecipherRSA))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(textFieldRSAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(textFieldRSAQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(textFieldRSAE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE))
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabel6))
+                                .addGap(43, 43, 43)
+                                .addComponent(buttonCipherRSA)
+                                .addGap(40, 40, 40)
+                                .addComponent(buttonDecipherRSA))
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(textFieldRSAP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(textFieldRSAQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(textFieldRSAE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabelRSAN)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelRSAFiN)
-                                .addGap(13, 13, 13)
-                                .addComponent(jLabelRSAD)))))
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel7)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabel6))
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(jLabelRSAN)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelRSAFiN)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(jLabelRSAD)))))))
                 .addGap(82, 82, 82))
         );
 
@@ -718,6 +796,65 @@ public class Main extends javax.swing.JFrame {
         clearTextAreaPermutacion.setText((String)permutacion.getClearData());
     }//GEN-LAST:event_buttonDecipherPermutacionActionPerformed
 
+    private void buttonCipherHillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherHillActionPerformed
+
+        String matrixKeyText = textAreaHillMatrix.getText();
+        String matrixTextLines[] = matrixKeyText.split("\n");
+        int m = matrixTextLines.length;
+        int key[][] = new int[m][m];
+        
+        for(int i=0;i<m;i++){
+            String tokens[] = matrixTextLines[i].split(" ");
+            for(int j=0;j<m;j++)
+                key[i][j] = Integer.parseInt(tokens[j]);
+        }
+        
+        
+        HillKey hKey = new HillKey(26, m, null, key);
+        hill.setKeys(hKey);
+        hill.setClearData(hKey.getTextData(clearTextAreaHill.getText().toLowerCase()));
+        hill.cipher();
+        
+        String secret = "";
+        Matrix[] secretData = (Matrix[])hill.getCipherData();
+        for (int i = 0; i < secretData.length; i++) {
+            for (int j = 0; j < m; j++) {
+                int v = (int)secretData[i].get(0, j);
+                secret += (char)(v+'a');
+            }
+        }
+        
+        cipherTextAreaHill.setText(secret);
+    }//GEN-LAST:event_buttonCipherHillActionPerformed
+
+    private void buttonDecipherHillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherHillActionPerformed
+        String matrixKeyText = textAreaHillMatrix.getText();
+        String matrixTextLines[] = matrixKeyText.split("\n");
+        int m = matrixTextLines.length;
+        int key[][] = new int[m][m];
+        
+        for(int i=0;i<m;i++){
+            String tokens[] = matrixTextLines[i].split(" ");
+            for(int j=0;j<m;j++)
+                key[i][j] = Integer.parseInt(tokens[j]);
+        }
+        
+        HillKey hKey = new HillKey(26, m, null, key);
+        hill.setKeys(hKey);
+        
+        hill.setCipherData(hKey.getTextData(cipherTextAreaHill.getText()));
+        hill.decipher();
+        Matrix[] secretData = (Matrix[])hill.getClearData();
+        String secret = "";
+        for (int i = 0; i < secretData.length; i++) {
+            for (int j = 0; j < m; j++) {
+                int v = (int)secretData[i].get(0, j);
+                secret += (char)(v+'a');
+            }
+        }
+        clearTextAreaHill.setText(secret);
+    }//GEN-LAST:event_buttonDecipherHillActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -756,24 +893,29 @@ public class Main extends javax.swing.JFrame {
     
     private ShiftCipher shift = new ShiftCipher();
     private RSA rsa = new RSA();
+    private Hill hill = new Hill();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCipherAfin;
+    private javax.swing.JButton buttonCipherHill;
     private javax.swing.JButton buttonCipherPermutacion;
     private javax.swing.JButton buttonCipherRSA;
     private javax.swing.JButton buttonCipherShift;
     private javax.swing.JButton buttonCipherVigenere;
     private javax.swing.JButton buttonDecipherAfin;
+    private javax.swing.JButton buttonDecipherHill;
     private javax.swing.JButton buttonDecipherPermutacion;
     private javax.swing.JButton buttonDecipherRSA;
     private javax.swing.JButton buttonDecipherShift;
     private javax.swing.JButton buttonDecipherVigenere;
     private javax.swing.JTextArea cipherTextAreaAfin;
+    private javax.swing.JTextArea cipherTextAreaHill;
     private javax.swing.JTextArea cipherTextAreaPermutacion;
     private javax.swing.JTextArea cipherTextAreaRSA;
     private javax.swing.JTextArea cipherTextAreaShift;
     private javax.swing.JTextArea cipherTextAreaVigenere;
     private javax.swing.JTextArea clearTextAreaAfin;
+    private javax.swing.JTextArea clearTextAreaHill;
     private javax.swing.JTextArea clearTextAreaPermutacion;
     private javax.swing.JTextArea clearTextAreaRSA;
     private javax.swing.JTextArea clearTextAreaShift;
@@ -781,6 +923,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -799,11 +944,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -816,6 +963,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerKeyAfinA;
     private javax.swing.JSpinner spinnerKeyAfinB;
     private javax.swing.JSpinner spinnerKeyShift;
+    private javax.swing.JTextArea textAreaHillMatrix;
     private javax.swing.JTextField textFieldPermutacionKey;
     private javax.swing.JTextField textFieldRSAE;
     private javax.swing.JTextField textFieldRSAP;
