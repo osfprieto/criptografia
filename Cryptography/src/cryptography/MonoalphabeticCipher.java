@@ -53,7 +53,7 @@ public class MonoalphabeticCipher {
     }
     
     public void decryp(){
-        setPlainText(doDecryption(getCipherText().toUpperCase()));
+        setPlainText(doDecryption(getCipherText().toLowerCase()));
     }
 
     public String getPlainText() {
