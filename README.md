@@ -6,10 +6,10 @@ Cryptography: Theory and practice, 3rd edition.
 Algoritmos a implementar:
 
 - Algoritmo de translación - Tato, listo.
-- Criptosistema por sustitución - Miguel
+- Criptosistema por sustitución - Miguel, listo.
 - Criptosistema Afín - Miguel, listo.
 - RSA (usa power mod) - Omar, listo.
 - Criptosistema Vigenere - Tato, listo.
-- Sistema de permutación (Caso especial de Hill) - Omar.
+- Sistema de permutación (Caso especial de Hill) - Omar, listo.
 - Criptosistema Hill mejorado - Eduar, listo.
 - Cifrado de Hill mejorado para imágenes. - Eduar, listo.
