@@ -5,8 +5,10 @@
  */
 package ui.osfprieto;
 
+import cryptography.AffineCipher;
 import cryptography.RSA;
 import cryptography.ShiftCipher;
+import cryptography.VigenereCipher;
 
 /**
  *
@@ -42,9 +44,28 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         cipherTextAreaShift = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        clearTextAreaAfin = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        cipherTextAreaAfin = new javax.swing.JTextArea();
+        buttonCipherAfin = new javax.swing.JButton();
+        buttonDecipherAfin = new javax.swing.JButton();
+        spinnerKeyAfinA = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        spinnerKeyAfinB = new javax.swing.JSpinner();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        clearTextAreaVigenere = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        cipherTextAreaVigenere = new javax.swing.JTextArea();
+        buttonCipherVigenere = new javax.swing.JButton();
+        buttonDecipherVigenere = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        textFieldVigenereKey = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -66,7 +87,6 @@ public class Main extends javax.swing.JFrame {
         textFieldRSAP = new javax.swing.JTextField();
         textFieldRSAQ = new javax.swing.JTextField();
         textFieldRSAE = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -99,6 +119,7 @@ public class Main extends javax.swing.JFrame {
 
         clearTextAreaShift.setColumns(20);
         clearTextAreaShift.setRows(5);
+        clearTextAreaShift.setText("Omar Simon Francisco Prieto Chacon");
         jScrollPane2.setViewportView(clearTextAreaShift);
 
         cipherTextAreaShift.setColumns(20);
@@ -120,7 +141,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,52 +168,184 @@ public class Main extends javax.swing.JFrame {
                 .addGap(103, 103, 103))
         );
 
-        jTabbedPane1.addTab("Sustitución", jPanel2);
+        jTabbedPane1.addTab("Translación", jPanel2);
+
+        clearTextAreaAfin.setColumns(20);
+        clearTextAreaAfin.setRows(5);
+        clearTextAreaAfin.setText("Omar Simon Francisco Prieto Chacon");
+        jScrollPane5.setViewportView(clearTextAreaAfin);
+
+        cipherTextAreaAfin.setColumns(20);
+        cipherTextAreaAfin.setRows(5);
+        jScrollPane6.setViewportView(cipherTextAreaAfin);
+
+        buttonCipherAfin.setText("-- Cifrar -->");
+        buttonCipherAfin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCipherAfinActionPerformed(evt);
+            }
+        });
+
+        buttonDecipherAfin.setText("<-- Descifrar --");
+        buttonDecipherAfin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecipherAfinActionPerformed(evt);
+            }
+        });
+
+        spinnerKeyAfinA.setValue(15);
+
+        jLabel8.setText("Key A");
+
+        jLabel9.setText("Key B");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spinnerKeyAfinB, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(151, 151, 151)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonDecipherAfin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonCipherAfin, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(401, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane6)
+                    .addContainerGap()))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(456, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCipherAfin)
+                    .addComponent(spinnerKeyAfinA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonDecipherAfin))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spinnerKeyAfinB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
+                .addGap(47, 47, 47))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane6)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                    .addGap(154, 154, 154)))
         );
 
         jTabbedPane1.addTab("Afín", jPanel3);
+
+        clearTextAreaVigenere.setColumns(20);
+        clearTextAreaVigenere.setRows(5);
+        clearTextAreaVigenere.setText("Omar Simon Francisco Prieto Chacon");
+        jScrollPane7.setViewportView(clearTextAreaVigenere);
+
+        cipherTextAreaVigenere.setColumns(20);
+        cipherTextAreaVigenere.setRows(5);
+        jScrollPane8.setViewportView(cipherTextAreaVigenere);
+
+        buttonCipherVigenere.setText("-- Cifrar -->");
+        buttonCipherVigenere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCipherVigenereActionPerformed(evt);
+            }
+        });
+
+        buttonDecipherVigenere.setText("<-- Descifrar --");
+        buttonDecipherVigenere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDecipherVigenereActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Palabra clave");
+
+        textFieldVigenereKey.setText("clavesecreta");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(textFieldVigenereKey, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(186, 186, 186)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buttonCipherVigenere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonDecipherVigenere))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCipherVigenere)
+                    .addComponent(jLabel10))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonDecipherVigenere))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(textFieldVigenereKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(48, 48, 48))
         );
 
         jTabbedPane1.addTab("Vigenere", jPanel4);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 567, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Hill", jPanel5);
+        jTabbedPane1.addTab("Sustitución", jPanel1);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,11 +354,24 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Permutación", jPanel6);
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 898, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 567, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Hill", jPanel5);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +384,7 @@ public class Main extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,6 +409,7 @@ public class Main extends javax.swing.JFrame {
 
         clearTextAreaRSA.setColumns(20);
         clearTextAreaRSA.setRows(5);
+        clearTextAreaRSA.setText("Omar Simon Francisco Prieto Chacon");
         jScrollPane3.setViewportView(clearTextAreaRSA);
 
         cipherTextAreaRSA.setColumns(20);
@@ -276,10 +443,13 @@ public class Main extends javax.swing.JFrame {
         jLabelRSAN.setText("N");
         jLabelRSAN.setToolTipText("P*Q");
 
+        textFieldRSAP.setText("89");
         textFieldRSAP.setToolTipText("Prime number");
 
+        textFieldRSAQ.setText("97");
         textFieldRSAQ.setToolTipText("Prime number");
 
+        textFieldRSAE.setText("13");
         textFieldRSAE.setToolTipText("Prime number");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -290,7 +460,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(112, 112, 112)
@@ -364,24 +534,14 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("RSA", jPanel10);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 896, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Traslación", jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addGap(54, 54, 54))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,19 +551,22 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherShiftActionPerformed
-        shift.setKeys(""+spinnerKeyShift.getValue());
-        shift.setClearData(clearTextAreaShift.getText());
-        shift.cipher();
-        cipherTextAreaShift.setText((String)shift.getCipherData());
-    }//GEN-LAST:event_buttonCipherShiftActionPerformed
+    private void buttonCipherRSAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherRSAActionPerformed
+        if(clearTextAreaRSA.getText().length()>0){
+            Long[] keys = new Long[3];
+            keys[0] = Long.parseLong(textFieldRSAP.getText());
+            keys[1] = Long.parseLong(textFieldRSAQ.getText());
+            keys[2] = Long.parseLong(textFieldRSAE.getText());
+            rsa.setKeys(keys);
+            jLabelRSAN.setText(rsa.getN()+"");
+            jLabelRSAFiN.setText(rsa.getFiN()+"");
+            jLabelRSAD.setText(rsa.getD()+"");
 
-    private void buttonDecipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherShiftActionPerformed
-        shift.setKeys(""+spinnerKeyShift.getValue());
-        shift.setCipherData(cipherTextAreaShift.getText());
-        shift.decipher();
-        clearTextAreaShift.setText((String)shift.getClearData());
-    }//GEN-LAST:event_buttonDecipherShiftActionPerformed
+            rsa.setClearData(clearTextAreaRSA.getText());
+            rsa.cipher();
+            cipherTextAreaRSA.setText((String) rsa.getCipherData());
+        }
+    }//GEN-LAST:event_buttonCipherRSAActionPerformed
 
     private void buttonDecipherRSAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherRSAActionPerformed
         if(cipherTextAreaRSA.getText().length()>0){
@@ -422,22 +585,53 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonDecipherRSAActionPerformed
 
-    private void buttonCipherRSAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherRSAActionPerformed
-        if(clearTextAreaRSA.getText().length()>0){
-            Long[] keys = new Long[3];
-            keys[0] = Long.parseLong(textFieldRSAP.getText());
-            keys[1] = Long.parseLong(textFieldRSAQ.getText());
-            keys[2] = Long.parseLong(textFieldRSAE.getText());
-            rsa.setKeys(keys);
-            jLabelRSAN.setText(rsa.getN()+"");
-            jLabelRSAFiN.setText(rsa.getFiN()+"");
-            jLabelRSAD.setText(rsa.getD()+"");
+    private void buttonDecipherVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherVigenereActionPerformed
+        VigenereCipher vigenere = new VigenereCipher();
+        vigenere.setKeys(textFieldVigenereKey.getText());
+        vigenere.setCipherData(cipherTextAreaVigenere.getText().toLowerCase());
+        vigenere.decipher();
+        clearTextAreaVigenere.setText((String) vigenere.getClearData());
+    }//GEN-LAST:event_buttonDecipherVigenereActionPerformed
 
-            rsa.setClearData(clearTextAreaRSA.getText());
-            rsa.cipher();
-            cipherTextAreaRSA.setText((String) rsa.getCipherData());
-        }
-    }//GEN-LAST:event_buttonCipherRSAActionPerformed
+    private void buttonCipherVigenereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherVigenereActionPerformed
+        VigenereCipher vigenere = new VigenereCipher();
+        vigenere.setKeys(textFieldVigenereKey.getText());
+        vigenere.setClearData(clearTextAreaVigenere.getText());
+        vigenere.cipher();
+        cipherTextAreaVigenere.setText((String) vigenere.getCipherData());
+    }//GEN-LAST:event_buttonCipherVigenereActionPerformed
+
+    private void buttonDecipherAfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherAfinActionPerformed
+        AffineCipher afinCipher = new AffineCipher();
+        afinCipher.setFirstKey((Integer) spinnerKeyAfinA.getValue());
+        afinCipher.setSecondKey((Integer) spinnerKeyAfinB.getValue());
+        afinCipher.setCipherText(cipherTextAreaAfin.getText().toLowerCase());
+        afinCipher.decryp();
+        clearTextAreaAfin.setText(afinCipher.getPlainText());
+    }//GEN-LAST:event_buttonDecipherAfinActionPerformed
+
+    private void buttonCipherAfinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherAfinActionPerformed
+        AffineCipher afinCipher = new AffineCipher();
+        afinCipher.setFirstKey((Integer) spinnerKeyAfinA.getValue());
+        afinCipher.setSecondKey((Integer) spinnerKeyAfinB.getValue());
+        afinCipher.setPlainText(clearTextAreaAfin.getText().toLowerCase());
+        afinCipher.encryp();
+        cipherTextAreaAfin.setText(afinCipher.getCipherText().toUpperCase());
+    }//GEN-LAST:event_buttonCipherAfinActionPerformed
+
+    private void buttonCipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCipherShiftActionPerformed
+        shift.setKeys(""+spinnerKeyShift.getValue());
+        shift.setClearData(clearTextAreaShift.getText());
+        shift.cipher();
+        cipherTextAreaShift.setText((String)shift.getCipherData());
+    }//GEN-LAST:event_buttonCipherShiftActionPerformed
+
+    private void buttonDecipherShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDecipherShiftActionPerformed
+        shift.setKeys(""+spinnerKeyShift.getValue());
+        shift.setCipherData(cipherTextAreaShift.getText());
+        shift.decipher();
+        clearTextAreaShift.setText((String)shift.getClearData());
+    }//GEN-LAST:event_buttonDecipherShiftActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,21 +673,32 @@ public class Main extends javax.swing.JFrame {
     private RSA rsa = new RSA();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonCipherAfin;
     private javax.swing.JButton buttonCipherRSA;
     private javax.swing.JButton buttonCipherShift;
+    private javax.swing.JButton buttonCipherVigenere;
+    private javax.swing.JButton buttonDecipherAfin;
     private javax.swing.JButton buttonDecipherRSA;
     private javax.swing.JButton buttonDecipherShift;
+    private javax.swing.JButton buttonDecipherVigenere;
+    private javax.swing.JTextArea cipherTextAreaAfin;
     private javax.swing.JTextArea cipherTextAreaRSA;
     private javax.swing.JTextArea cipherTextAreaShift;
+    private javax.swing.JTextArea cipherTextAreaVigenere;
+    private javax.swing.JTextArea clearTextAreaAfin;
     private javax.swing.JTextArea clearTextAreaRSA;
     private javax.swing.JTextArea clearTextAreaShift;
+    private javax.swing.JTextArea clearTextAreaVigenere;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelRSAD;
     private javax.swing.JLabel jLabelRSAFiN;
     private javax.swing.JLabel jLabelRSAN;
@@ -511,10 +716,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSpinner spinnerKeyAfinA;
+    private javax.swing.JSpinner spinnerKeyAfinB;
     private javax.swing.JSpinner spinnerKeyShift;
     private javax.swing.JTextField textFieldRSAE;
     private javax.swing.JTextField textFieldRSAP;
     private javax.swing.JTextField textFieldRSAQ;
+    private javax.swing.JTextField textFieldVigenereKey;
     // End of variables declaration//GEN-END:variables
 }
