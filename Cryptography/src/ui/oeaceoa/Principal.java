@@ -1,6 +1,8 @@
 package ui.oeaceoa;
 
 import java.awt.Color;
+import cryptography.*;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,17 +19,25 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      *
      */
-  //  private ShiftCipherPanel pnlShiftChiper = new ShiftCipherPanel();
-    public String cipherTxt;
+ public String cipherTxt;
     public String plainText;
+    private String keySubstitution;
+    private String keyHill;
+    private String clearTextHill;
+    private int k1Affine;
+    private int k2Affine;
+    private String keyPerm;
+ //   private Matrix clearD;
     
     public Principal() {
         initComponents();
         inicioDefault();
-        this.setTitle("Cifrado y Descrifrado 2015");
+        this.setTitle("Criptosistema - Oscar Acero");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,7 +135,7 @@ public class Principal extends javax.swing.JFrame {
         jpOptions.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criptosistema", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18))); // NOI18N
         jpOptions.setName("Opciones"); // NOI18N
 
-        cboxOptions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Desplazamiento", "Vigenere" }));
+        cboxOptions.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Desplazamiento", "Sustitución", "Vigenere", "Hill", "Afin", "Permutación", "SDES" }));
         cboxOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxOptionsActionPerformed(evt);
@@ -192,14 +202,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDescifrarActionPerformed
     
     private void cboxOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxOptionsActionPerformed
-        // TODO add your handling code here:
-        if (cboxOptions.getSelectedItem() == "Desplazamiento") {            
+            // TODO add your handling code here:
+        if (cboxOptions.getSelectedIndex() == 1) {            
             if (cbCifrar.isSelected() == true) {
                 ShiftCipherDialog dialog = new ShiftCipherDialog(this, true);
                 dialog.setPlainText(this.taPlainText.getText());
                 dialog.setVisible(true);
-                
-                this.taCipherText.setText(dialog.getCipherText());                
+                try
+                {
+                    this.taCipherText.setText(dialog.getCipherText());
+                }
+                 catch(Exception e)
+                 {
+                 
+                 }
             } else if (cbDescifrar.isSelected() == true) {
                 ShiftDecipherDialog dialog = new ShiftDecipherDialog(this, true);
                 dialog.setCipherText(this.taCipherText.getText());
@@ -207,22 +223,196 @@ public class Principal extends javax.swing.JFrame {
                 
                 this.taPlainText.setText(dialog.getPlainText());
             }
-        } else if (cboxOptions.getSelectedItem() == "Vigenere") {
+        } else if (cboxOptions.getSelectedIndex() == 3) {
             if (cbCifrar.isSelected() == true) {
                 VigenereCipherDialog dialog = new VigenereCipherDialog(this, true);
                 dialog.setPlainText(this.taPlainText.getText());
                 dialog.setVisible(true);
+                try
+                {
+                    this.taCipherText.setText(dialog.getCipherText().toUpperCase());
+                }
+                 catch(Exception e)
+                 {
+                 
+                 }               
                 
-                this.taCipherText.setText(dialog.getCipherText());
             } else if (cbDescifrar.isSelected() == true) {
                 
                 VigenereDecipherDialog dialog = new VigenereDecipherDialog(this, true);
-                dialog.setCipherText(this.taCipherText.getText());
+                dialog.setCipherText(this.taCipherText.getText().toLowerCase());
                 dialog.setVisible(true);
-                
-                this.taPlainText.setText(dialog.getPlainText());
+                try
+                {
+                    this.taPlainText.setText(dialog.getPlainText());
+                }
+                catch(Exception e)
+                {}
             }
         }
+        else if(cboxOptions.getSelectedIndex() == 2)
+        {
+             SubstitutionCipherDialog dialogC = new SubstitutionCipherDialog(this, true);
+              
+            if (cbCifrar.isSelected() == true) {
+                dialogC.setPlainText(this.taPlainText.getText());
+                dialogC.setVisible(true);
+                try
+                {
+                    this.taCipherText.setText(dialogC.getCipherText().toUpperCase().replace(" ", ""));
+                    this.keySubstitution = dialogC.getKey();
+                }
+                catch(Exception e)
+                {}
+            } 
+            else if (cbDescifrar.isSelected() == true) {
+                SubstitutionDecipherDialog dialogD = new SubstitutionDecipherDialog(this, true, this.keySubstitution);  
+                dialogD.setCipherText(this.taCipherText.getText());
+                dialogD.setKey(this.keySubstitution);
+                dialogD.setVisible(true);
+                try
+                {
+                    this.taPlainText.setText(dialogD.getPlainText().replace(" ", ""));
+                }
+                catch(Exception e)
+                {}
+            }
+        }
+        else if(cboxOptions.getSelectedIndex() == 4)
+        {
+            HillCipherDialog dialogC = new HillCipherDialog(this, true);
+            if (cbCifrar.isSelected() == true) 
+            {
+                dialogC.setPlainText(this.taPlainText.getText());
+                this.clearTextHill = dialogC.getPlainText();
+                //this.clearD = dialogC.getClearD();
+                
+                dialogC.setVisible(true);
+                try
+                {
+                    this.taCipherText.setText(dialogC.getCipherText().toUpperCase());
+                    this.keyHill = dialogC.getKey();
+                }
+                 catch(Exception e)
+                 {
+                 
+                 }         
+            }
+            else if(cbDescifrar.isSelected() == true)
+            {
+              HillDecipherDialog dialogD = new HillDecipherDialog(this, true, this.keyHill);
+               dialogD.setCipherText(this.taCipherText.getText().toLowerCase());
+                dialogD.setKey(this.keyHill);
+                dialogD.setPlainText(this.clearTextHill);
+//                dialogD.setM(clearD);
+                dialogD.setVisible(true);
+                try
+                {
+                    this.taPlainText.setText(dialogD.getPlainText().replace(" ", ""));
+                }
+                catch(Exception e)
+                {}
+            
+            }
+        }
+        else if(cboxOptions.getSelectedIndex() == 5)
+        {
+            AffineCipherDialog dialogC = new AffineCipherDialog(this, true);
+            if(cbCifrar.isSelected() == true)
+            {
+                dialogC.setPlainText(this.taPlainText.getText());
+                dialogC.setVisible(true);
+                try
+                {
+                    this.taCipherText.setText(dialogC.getCipherText().toUpperCase().replace(" ", ""));
+                    this.k1Affine = dialogC.getKey1();
+                    this.k2Affine = dialogC.getKey2();
+                }
+                catch(Exception e)
+                {}
+            }
+            else if(cbDescifrar.isSelected() == true)
+            {
+                AffineDecipherDialog dialogD = new AffineDecipherDialog(this, true, this.k1Affine, this.k2Affine);
+                dialogD.setCipherText(this.taCipherText.getText());
+                dialogD.setKey1(this.k1Affine);
+                dialogD.setKey2(this.k2Affine);
+                dialogD.setVisible(true);
+                try
+                {
+                    this.taPlainText.setText(dialogD.getPlainText().replace(" ", ""));
+                }
+                catch(Exception e)
+                {}
+            
+            }
+        }
+        
+        else if(cboxOptions.getSelectedIndex() == 6)
+        {
+               PermutationCipherDialog dialogC = new PermutationCipherDialog(this, true);
+            if(cbCifrar.isSelected() == true)
+            { 
+                if (cbCifrar.isSelected() == true) {
+                    dialogC.setPlainText(this.taPlainText.getText());
+                    dialogC.setVisible(true);
+                    try
+                    {
+                        this.taCipherText.setText(dialogC.getCipherText().toUpperCase());
+                        this.keyPerm = dialogC.getKey();
+                    }
+                    catch(Exception e)
+                    {}
+                }
+            }
+                  else if(cbDescifrar.isSelected() == true)
+                {
+                    PermutationDecipherDialog dialogD = new PermutationDecipherDialog(this, true, this.keyPerm);
+                    dialogD.setCipherText(this.taCipherText.getText().toLowerCase());
+                    dialogD.setKey(this.keyPerm);
+                    dialogD.setVisible(true);
+                    try
+                    {
+                        this.taPlainText.setText(dialogD.getPlainText().replace(" ", ""));
+                    }
+                    catch(Exception e)
+                    {}
+            }
+        }
+        else if(cboxOptions.getSelectedIndex() == 7)
+        {
+                if (cbCifrar.isSelected() == true) {
+                    SDESDialogCipher dialogC = new SDESDialogCipher(this, true);
+                    dialogC.setPlainText(((this.taPlainText.getText()).replaceAll("[^A-Za-z]+", "")).toLowerCase());
+                    dialogC.setCifrar(true);
+                    dialogC.setVisible(true);
+                    try
+                    {
+                        JOptionPane.showMessageDialog(this, "El texto cifrado se muestra en hexadecimal");
+                        this.taCipherText.setText(dialogC.getCipherText().toUpperCase());
+                        //this.keyPerm = dialogC.getKey();
+                    }
+                    catch(Exception e)
+                    {}
+                }
+                 else if(cbDescifrar.isSelected() == true)
+                {
+                    SDESDialogCipher dialogD = new SDESDialogCipher(this, true);
+                    dialogD.setPlainText(this.taCipherText.getText());
+                    dialogD.setCifrar(false);
+                    dialogD.setVisible(true);
+                    try
+                    {
+                        //JOptionPane.showMessageDialog(this, "El texto cifrado se muestra en hexadecimal");
+                        this.taPlainText.setText(dialogD.getCipherText());
+                        //this.keyPerm = dialogC.getKey();
+                    }
+                    catch(Exception e)
+                    {}
+                }
+            }
+                 
+        
     }//GEN-LAST:event_cboxOptionsActionPerformed
     
     private void inicioDefault() {

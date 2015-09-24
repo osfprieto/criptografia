@@ -5,7 +5,7 @@
  */
 package ui.oeaceoa;
 
-import CryptographyAlgorithms.VigenereCipherAlgorithm;
+import cryptography.VigenereCipher;
 
 /**
  *
@@ -18,7 +18,7 @@ public class VigenereDecipherDialog extends javax.swing.JDialog {
      */
     private String plainText;
     private String cipherText;
-    VigenereCipherAlgorithm encryptor = new VigenereCipherAlgorithm();
+    VigenereCipher encryptor = new VigenereCipher();
     public VigenereDecipherDialog(Principal parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -234,7 +234,7 @@ public class VigenereDecipherDialog extends javax.swing.JDialog {
         
         encryptor.setCipherData(getCipherText());
         encryptor.setKeys(this.tfKeyword.getText());
-        encryptor.decrypt();
+        encryptor.decipher();
         this.setPlainText((String)encryptor.getClearData());           
         this.hide();
     }//GEN-LAST:event_btnDescifarActionPerformed

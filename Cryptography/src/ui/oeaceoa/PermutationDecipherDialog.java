@@ -5,24 +5,22 @@
  */
 package ui.oeaceoa;
 
-import cryptography.ShiftCipher;
+import cryptography.Permutacion;
 
-/**
- *
- * @author Tato
- */
-public class ShiftDecipherDialog extends javax.swing.JDialog {
+public class PermutationDecipherDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form ShiftDecipher
+     * Creates new form PermutationDecipherDialog
      */
     private String plainText;
     private String cipherText;
+    private String key;
     
-    public ShiftDecipherDialog(Principal parent, boolean modal) {
+    public PermutationDecipherDialog(Principal parent, boolean modal, String key) {
         super(parent, modal);
         initComponents();
-        this.setTitle("Descifrado por desplazamiento");
+        this.setTitle("Descifrado por Permutación");
+        this.tfKey.setText(key);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -36,10 +34,17 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDescifrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfKey = new javax.swing.JTextField();
+        btnDescifrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Para aplicar el descifrado se parte de conocer la clave con la cuál se cifró el texto. ");
+
+        jLabel3.setText("Separe cada número con coma y espacio.");
 
         btnDescifrar.setText("Descifrar");
         btnDescifrar.addActionListener(new java.awt.event.ActionListener() {
@@ -48,31 +53,37 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Se aplicará el método de búsqueda exhaustiva para decifrar el texto ingresado");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addGap(176, 176, 176)
+                .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDescifrar)
-                        .addGap(225, 225, 225))
+                        .addComponent(jLabel3)
+                        .addGap(117, 117, 117))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                        .addComponent(btnDescifrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(181, 181, 181))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(tfKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDescifrar)
-                .addGap(18, 18, 18))
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -80,17 +91,21 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
 
     private void btnDescifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescifrarActionPerformed
         // TODO add your handling code here:
-        ShiftCipher encryptor = new ShiftCipher();
-        encryptor.setCipherData(getCipherText());
+        Permutacion encryptor = new Permutacion();
+        encryptor.setKeys(tfKey.getText());
+        encryptor.setCipherData(this.cipherText);
         encryptor.decipher();
-        this.setPlainText((String)encryptor.getClearData());           
-        this.hide();
+        this.setPlainText((String)encryptor.getClearData());
+        hide();
     }//GEN-LAST:event_btnDescifrarActionPerformed
 
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDescifrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField tfKey;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -119,5 +134,19 @@ public class ShiftDecipherDialog extends javax.swing.JDialog {
      */
     public void setCipherText(String cipherText) {
         this.cipherText = cipherText;
+    }
+
+    /**
+     * @return the key
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * @param key the key to set
+     */
+    public void setKey(String key) {
+        this.key = key;
     }
 }

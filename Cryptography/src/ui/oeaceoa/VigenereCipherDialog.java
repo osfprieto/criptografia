@@ -6,7 +6,7 @@
 package ui.oeaceoa;
 
 
-import CryptographyAlgorithms.VigenereCipherAlgorithm;
+import cryptography.VigenereCipher;
 
 /**
  *
@@ -99,10 +99,10 @@ public class VigenereCipherDialog extends javax.swing.JDialog {
 
     private void btnCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCifrarActionPerformed
         // TODO add your handling code here:
-        VigenereCipherAlgorithm encryptor = new VigenereCipherAlgorithm();
+        VigenereCipher encryptor = new VigenereCipher();
         encryptor.setClearData(getPlainText());
         encryptor.setKeys((String) this.tfKeyWord.getText());
-        encryptor.encrypt();
+        encryptor.cipher();
         this.setCipherText((String) encryptor.getCipherData());        
         this.hide();
     }//GEN-LAST:event_btnCifrarActionPerformed
