@@ -183,9 +183,10 @@ public class Principal extends javax.swing.JFrame {
     private void cbCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCifrarActionPerformed
         // TODO add your handling code here:
         cbDescifrar.setSelected(false);
-        taCipherText.setEnabled(false);
+        taCipherText.setEditable(false);
         taCipherText.setText("");
-        taPlainText.setEnabled(true);
+        taPlainText.setText("");
+        taPlainText.setEditable(true);
         cboxOptions.setSelectedIndex(0);
         
     }//GEN-LAST:event_cbCifrarActionPerformed
@@ -193,11 +194,10 @@ public class Principal extends javax.swing.JFrame {
     private void cbDescifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDescifrarActionPerformed
         // TODO add your handling code here:
         cbCifrar.setSelected(false);
-        taCipherText.setEnabled(true);
-        taPlainText.setEnabled(false);
+        taCipherText.setEditable(true);
+        taPlainText.setEditable(false);
         taPlainText.setText("");
-        cboxOptions.setSelectedIndex(0);
-        taPlainText.setText("");        
+        cboxOptions.setSelectedIndex(0);        
         
     }//GEN-LAST:event_cbDescifrarActionPerformed
     
@@ -416,9 +416,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cboxOptionsActionPerformed
     
     private void inicioDefault() {
-        taCipherText.setEnabled(false);
-        taPlainText.setEnabled(false);
-        //jpOptions.setVisible(false);
+        taCipherText.setEditable(false);
+        taPlainText.setEditable(false);
     }
     
     public String getCipherText() {

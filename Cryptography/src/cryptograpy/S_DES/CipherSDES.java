@@ -23,23 +23,7 @@ public class CipherSDES {
   void SaveParameters(String plaintext , int[] k1, int[] k2)
   {
 	int[] pt = new int[8];
-	
-	/*
-    int temp;
-    for(int i=7;i>=0;i--)	
-    {
-      temp = plaintext % 10;
-      pt[i] = temp;
-      if(temp != 0 && temp != 1)
-      {
-        System.out.println("-- Error Occured : please enter valid 8-bit plaintext  ");
-        System.exit(0);
-		return;
-      }      
-      plaintext = plaintext/10;
-    }
-    */
-		
+			
 	char c1;
 	String ts ;
 	
@@ -270,7 +254,26 @@ public class CipherSDES {
         }
         else if(this.cifrar == false)
         {
-            plaintext = Integer.toBinaryString(Integer.parseInt(plaintext, 16)); //acá esta fallando
+            String cipherTextBinary = "";
+            int cipherTextHex;
+            for(int i = 0; i < plaintext.length(); i++){   
+                cipherTextHex = Integer.parseInt(String.valueOf(plaintext.charAt(i)),16);
+                if(cipherTextHex <=1)
+                {
+                    cipherTextBinary += "000";
+                }
+                if(cipherTextHex >=2 && cipherTextHex <=3)
+                {
+                    cipherTextBinary += "00";
+                }
+                if(cipherTextHex >=4 && cipherTextHex <=7)
+                {
+                    cipherTextBinary += "0";
+                }
+                
+                cipherTextBinary += Integer.toBinaryString(cipherTextHex);
+            }
+            plaintext = cipherTextBinary;
         }
         String plainText8Bits;
         
@@ -380,6 +383,10 @@ public class CipherSDES {
 
              //System.out.println((char)letra);
              if(cifrar == true){
+                if(letra <=15 )
+                {
+                    this.cipherText += "0";
+                } 
                 this.cipherText += String.valueOf(Integer.toHexString(letra));
              }
              else if(cifrar == false)

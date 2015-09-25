@@ -181,7 +181,7 @@ public class SDESDialogCipher extends javax.swing.JDialog {
     private void tfKeyKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKeyKeyTyped
         // TODO add your handling code here:
         char c=evt.getKeyChar(); 
-          if( c != '0' || c != '1' || c != '\b') { 
+          if( c != '0' && c != '1' && c != '\b') { 
               getToolkit().beep();  
               evt.consume();
           } 
